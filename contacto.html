@@ -63,6 +63,15 @@
             text-decoration: none;
             color: var(--azul-principal);
         }
+		
+		/* AJUSTE CLAVE AÑADIDO: Fuerza al enlace del logo a comportarse como un bloque */
+		/* y elimina cualquier espaciado interno que pudiera estar afectando la altura. */
+		.logo a {
+			display: block;
+			line-height: 0; /* Asegura que no añade altura extra por el texto */
+			padding: 0;
+			margin: 0;
+		}
 
         /* Botón CTA Principal */
         .btn-cta {
@@ -106,6 +115,7 @@
             width: auto;
         }
 
+        /* Estilos de Navegación BASE (Desktop) */
         nav ul {
             list-style: none;
             display: flex;
@@ -128,7 +138,7 @@
             color: var(--azul-principal);
         }
 
-        /* Icono Hamburguesa */
+        /* Icono Hamburguesa (Oculto en Desktop) */
         .menu-toggle {
             display: none; 
             font-size: 1.8em;
@@ -252,6 +262,66 @@
         /* MEDIA QUERIES (RESPONSIVE) */
         /* ------------------------------------- */
         
+        /* Tablet (ancho máximo 992px) */
+        @media (max-width: 992px) {
+            
+            /* INICIO: CÓDIGO DE NAVEGACIÓN RESPONSIVE COPIADO DE INDEX.HTML */
+            .menu-toggle {
+                display: block;
+            }
+            
+            nav {
+                position: absolute;
+                top: 90px; 
+                right: 0;
+                width: 100%;
+                background-color: var(--blanco);
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+                z-index: 100;
+                display: none; 
+                padding: 10px 0;
+            }
+
+            nav ul {
+                flex-direction: column;
+                align-items: flex-start;
+                padding: 0;
+            }
+
+            nav ul li {
+                margin: 0;
+                width: 100%;
+                text-align: center;
+                border-bottom: 1px solid var(--gris-claro);
+            }
+            
+            nav ul li:last-child {
+                border-bottom: none;
+            }
+
+            nav ul li a {
+                padding: 15px 20px;
+                color: var(--gris-oscuro);
+            }
+            
+            nav ul li a:hover {
+                color: var(--azul-principal);
+                background-color: var(--gris-claro); 
+            }
+
+            .nav-open {
+                display: block;
+            }
+            /* FIN: CÓDIGO DE NAVEGACIÓN RESPONSIVE COPIADO DE INDEX.HTML */
+
+            .contact-section {
+                padding: 60px 0;
+            }
+            .contact-form {
+                padding: 30px 20px;
+            }
+        }
+        
         /* Escritorio (>= 993px) */
         @media (min-width: 993px) {
             .form-fields {
@@ -262,10 +332,13 @@
                 grid-column: 1 / -1; 
             }
         }
-        
-        /* Tablet y Móvil (<= 992px) */
-        @media (max-width: 992px) {
-            /* Estilos de navegación móvil para Header omitidos por brevedad */
+
+        /* Móvil (ancho máximo 768px) */
+        @media (max-width: 768px) {
+            /* Asegura que el logo no se rompa */
+            .header-content {
+                flex-direction: row; 
+            }
         }
     </style>
 </head>
@@ -285,7 +358,7 @@
 
             <nav id="mainNav">
                 <ul>
-                    <li><a href="#">Eventos</a></li> 
+                    <li><a href="eventos.html">Eventos</a></li> 
                     <li><a href="#">Nosotros</a></li> 
                     <li><a href="contacto.html" style="color: var(--azul-principal);">Contacto</a></li> 
                 </ul>
@@ -373,9 +446,9 @@
             confirmationDiv.style.display = 'block';
             setTimeout(() => {
                 confirmationDiv.classList.add('show');
-            }, 10); // Pequeño retraso para asegurar la transición
+            }, 10); 
 
-            // 3. Obtener los datos y construir el cuerpo del correo (opcional, para el mailto)
+            // 3. Obtener los datos y construir el cuerpo del correo
             const formData = new FormData(form);
             let body = '';
             for (const [key, value] of formData.entries()) {
@@ -383,21 +456,18 @@
             }
             
             // 4. Abrir el cliente de correo con los datos
-            // Esta acción ocurre después de la confirmación visual.
-            // NOTA: Algunos navegadores pueden bloquear esto si no es una acción directa del usuario.
             const mailtoLink = `mailto:pallares.carolina@gmail.com?subject=Nueva Consulta de Eventos&body=${encodeURIComponent(body)}`;
             window.location.href = mailtoLink;
 
-            // 5. Resetear los campos después de un breve momento
+            // 5. Resetear los campos y revertir la vista después de un breve momento
             setTimeout(() => {
                 form.reset();
                 
-                // Opcional: Ocultar el mensaje y mostrar el formulario para un nuevo envío
+                // Ocultar el mensaje y mostrar el formulario para un nuevo envío
                 confirmationDiv.classList.remove('show');
                 confirmationDiv.style.display = 'none';
                 formContainer.style.display = 'block'; 
-            }, 8000); // Muestra el mensaje de confirmación durante 8 segundos.
-
+            }, 8000); 
         });
     </script>
 </body>

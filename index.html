@@ -54,6 +54,15 @@
             text-decoration: none;
             color: var(--azul-principal);
         }
+		
+		/* AJUSTE CLAVE AÑADIDO: Fuerza al enlace del logo a comportarse como un bloque */
+		/* y elimina cualquier espaciado interno que pudiera estar afectando la altura. */
+		.logo a {
+			display: block;
+			line-height: 0; /* Asegura que no añade altura extra por el texto */
+			padding: 0;
+			margin: 0;
+		}
 
         /* Botón CTA Principal */
         .btn-cta {
@@ -565,7 +574,7 @@
 
             <nav id="mainNav">
                 <ul>
-                    <li><a href="#">Eventos</a></li> 
+                    <li><a href="eventos.html">Eventos</a></li> 
                     <li><a href="#">Nosotros</a></li> 
                     <li><a href="contacto.html">Contacto</a></li> 
                 </ul>

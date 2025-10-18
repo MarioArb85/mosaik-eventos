@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Boda Clásica en Santorini | Mosaïk Eventos</title>
+    
+    <link rel="icon" type="image/png" href="mosaik-favicon.jpg"> 
+    
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    <style>
+        /* Paleta de Colores de Mosaïk Eventos */
+        :root {
+            --azul-principal: #3E649E;
+            --gris-oscuro: #29323C;
+            --gris-claro: #F2F2F0;
+            --blanco: #FFFFFF;
+        }
+
+        /* Estilos Globales */
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        html { height: 100%; }
+        body {
+            font-family: 'Open Sans', sans-serif; line-height: 1.6; color: var(--gris-oscuro);
+            background-color: var(--blanco);
+            display: flex; flex-direction: column; min-height: 100vh;
+        }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+        h1, h2, h3 { font-family: 'Montserrat', sans-serif; font-weight: 700; margin-bottom: 20px; }
+        a { text-decoration: none; color: var(--azul-principal); }
+        
+        /* Contenido Principal */
+        .main-content { 
+            flex-grow: 1; 
+            padding: 80px 0; 
+            background-color: var(--gris-claro); 
+        }
+
+        /* ------------------------------------- */
+        /* 1. Header & Navegación (Uniforme) */
+        /* ------------------------------------- */
+        header { 
+            background-color: var(--blanco); 
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05); 
+            padding: 15px 0; 
+            position: relative; 
+        }
+        .header-content { display: flex; justify-content: space-between; align-items: center; }
+        .logo a { display: block; line-height: 0; padding: 0; margin: 0; } 
+        .logo img { max-height: 60px; width: auto; }
+        nav ul { list-style: none; display: flex; align-items: center; padding: 0; }
+        nav ul li { margin-left: 30px; }
+        nav ul li a { color: var(--gris-oscuro); font-weight: 600; padding: 10px 0; display: block; transition: color 0.3s ease; }
+        nav ul li a:hover { color: var(--azul-principal); }
+        .menu-toggle { display: none; font-size: 1.8em; cursor: pointer; color: var(--gris-oscuro); }
+        
+        /* ------------------------------------- */
+        /* 2. Secciones Específicas del Evento */
+        /* ------------------------------------- */
+        .hero-evento { 
+            background: url('img/Bodas_Portada.jpg') center/cover no-repeat; 
+            height: 400px;
+            color: var(--blanco);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        .hero-evento h1 { font-size: 3.5em; margin: 0; }
+        
+        .event-info { padding: 60px 0; background-color: var(--blanco); text-align: center;}
+        .event-info h2 { color: var(--azul-principal); font-size: 2em; }
+        .event-info p { max-width: 1200px; margin: 0 auto 15px; padding: 0 20px;} 
+
+        /* --- Estilos del Carrusel (FINITO) --- */
+        .gallery-wrapper-container {
+            max-width: 1260px; 
+            margin: 0 auto;
+            position: relative;
+            padding: 0 20px;
+        }
+        .gallery-wrapper {
+            overflow: hidden; 
+            white-space: nowrap;
+            display: flex;
+            align-items: center;
+            padding: 0 40px; 
+        }
+        .gallery-track {
+            display: flex;
+            transition: transform 0.3s ease-in-out;
+        }
+        .gallery-item {
+            flex: 0 0 calc(33.333% - 13.333px); 
+            margin-right: 20px; 
+            height: 250px; 
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .gallery-item:last-child {
+            margin-right: 0;
+        }
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            cursor: zoom-in;
+            transition: transform 0.5s;
+        }
+        .gallery-item img:hover {
+            transform: scale(1.05);
+        }
+        .gallery-title { text-align: center; margin-bottom: 20px; color: var(--gris-oscuro); }
+
+        /* Estilos de flechas de navegación del carrusel (FUERA DE LAS FOTOS) */
+        .carousel-nav-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(41, 50, 60, 0.7);
+            color: var(--blanco);
+            border: none;
+            padding: 10px 15px;
+            cursor: pointer;
+            font-size: 1.5em;
+            transition: background 0.3s, opacity 0.3s;
+            z-index: 50;
+            border-radius: 50%;
+            line-height: 1;
+        }
+        .carousel-nav-btn:hover {
+            background: var(--azul-principal);
+        }
+        #prevBtn { left: 5px; } 
+        #nextBtn { right: 5px; }
+
+        .carousel-nav-btn:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+            background: rgba(41, 50, 60, 0.5);
+        }
+
+        /* ------------------------------------- */
+        /* 3. LIGHTBOX (VISOR DE FOTOS - FINITO) */
+        /* ------------------------------------- */
+        .lightbox-overlay {
+            display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+            background-color: rgba(0, 0, 0, 0.8); backdrop-filter: blur(5px);
+            z-index: 1000; align-items: center; justify-content: center; padding: 20px;
+        }
+        .lightbox-content {
+            position: relative; max-width: 90%; max-height: 90%; display: flex; align-items: center;
+        }
+        .lightbox-content img {
+            max-width: 100%; max-height: 80vh; object-fit: contain; border-radius: 5px;
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.7);
+        }
+
+        /* Flechas de navegación */
+        .lightbox-nav {
+            background: rgba(41, 50, 60, 0.9); 
+            color: var(--blanco); 
+            border: none; 
+            padding: 15px;
+            cursor: pointer; 
+            font-size: 2em; 
+            transition: background 0.3s, opacity 0.3s; 
+            z-index: 1001;
+            border-radius: 5px; 
+            position: absolute; 
+            top: 50%; 
+            transform: translateY(-50%);
+        }
+        .lightbox-nav:hover { background: var(--azul-principal); }
+        .lightbox-nav:disabled {
+             opacity: 0.3;
+            cursor: not-allowed;
+            background: rgba(41, 50, 60, 0.5);
+        }
+
+        /* Botón de cierre */
+        .lightbox-close {
+            position: absolute; 
+            top: 20px; 
+            right: 20px; 
+            font-size: 1.8em; 
+            padding: 10px 15px;
+            background: rgba(41, 50, 60, 0.9); 
+            color: var(--blanco); 
+            border: none; 
+            border-radius: 5px;
+            cursor: pointer; 
+            transition: background 0.3s; 
+            z-index: 1002;
+        }
+        .lightbox-close:hover { background: var(--azul-principal); }
+
+        /* Posición de los iconos fuera del área de la imagen grande */
+        #lightboxPrev { left: -60px; } 
+        #lightboxNext { right: -60px; }
+
+        /* ------------------------------------- */
+        /* 4. Footer (Mínimo Solicitado) */
+        /* ------------------------------------- */
+        footer {
+            background-color: var(--gris-oscuro);
+            color: var(--gris-claro);
+            padding: 20px 0;
+            font-size: 0.9em;
+            text-align: center;
+        }
+        footer p {
+            margin: 0;
+        }
+
+        /* MEDIA QUERIES */
+        @media (max-width: 992px) {
+            .menu-toggle { display: block; }
+            nav { position: absolute; top: 90px; right: 0; width: 100%; background-color: var(--blanco); box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); z-index: 100; display: none; padding: 10px 0; }
+            nav ul { flex-direction: column; align-items: flex-start; padding: 0; }
+            nav ul li { margin: 0; width: 100%; text-align: center; border-bottom: 1px solid var(--gris-claro); }
+            .nav-open { display: block; }
+
+            .hero-evento { height: 250px; }
+            .hero-evento h1 { font-size: 2.5em; }
+
+            /* Carrusel Responsivo: 2 fotos en tablet */
+            .gallery-item {
+                flex: 0 0 calc(50% - 10px); 
+            }
+            .carousel-nav-btn { display: none; } 
+            .gallery-wrapper { overflow-x: scroll; padding: 0 10px;} 
+            .gallery-track { transform: none !important; }
+
+            /* Flechas de lightbox en posición responsive (dentro de la pantalla) */
+            #lightboxPrev { left: 20px; } 
+            #lightboxNext { right: 20px; }
+        }
+        @media (max-width: 600px) {
+             /* Carrusel Responsivo: 1 foto en móvil */
+            .gallery-item {
+                flex: 0 0 calc(100% - 10px); 
+            }
+        }
+    </style>
+</head>
+<body>
+    
+    <header>
+        <div class="container header-content">
+            <div class="logo">
+                <a href="index.html">
+                    <img src="mosaik-logo.jpg" alt="Mosaïk Eventos">
+                </a>
+            </div>
+            
+            <div class="menu-toggle" id="menuToggle">
+                <i class="fas fa-bars"></i>
+            </div>
+
+            <nav id="mainNav">
+                <ul>
+                    <li><a href="eventos.html" style="color: var(--azul-principal);">Eventos</a></li> 
+                    <li><a href="#">Nosotros</a></li> 
+                    <li><a href="contacto.html" style="color: var(--azul-principal);">Contacto</a></li> 
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero-evento">
+        <h1>Boda Clásica en Santorini</h1>
+    </section>
+
+    <section class="event-info">
+        <div class="container">
+            <h2>Un Sueño Mediterráneo Hecho Realidad</h2>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam, vitae. Quas, eaque voluptate! Reprehenderit, veritatis. Vero, dignissimos at deleniti dolore laboriosam corporis natus! Numquam iste, iusto cumque facilis, ex vitae, quos modi id nobis temporibus veniam. Adipisci, officia? Quam, voluptatum. Esto es para rellenar el ancho máximo de 1200px.</p>
+            <p>Aliquid omnis beatae, quae debitis cumque voluptatem, eius maxime id, perferendis rerum quo error. Distinctio est nulla deleniti animi, non sapiente! Nemo quisquam rem, veritatis facilis dolor assumenda earum, corporis quos voluptatem, sint ratione illum.</p>
+        </div>
+    </section>
+    
+    <section class="main-content">
+        <div class="gallery-wrapper-container">
+            <h2 class="gallery-title">Galería del Evento</h2>
+
+            <button class="carousel-nav-btn" id="prevBtn">&#10094;</button>
+            <div class="gallery-wrapper" id="eventGallery1">
+                <div class="gallery-track">
+                    <div class="gallery-item"><img src="img/Bodas_Portada.jpg" alt="Foto Boda 1" data-image="img/Bodas_Portada.jpg"></div>
+                    <div class="gallery-item"><img src="img/Conciertos_Portada.jpg" alt="Foto Boda 2" data-image="img/Conciertos_Portada.jpg"></div>
+                    <div class="gallery-item"><img src="img/Tactik_Portada.jpg" alt="Foto Boda 3" data-image="img/Tactik_Portada.jpg"></div>
+                    <div class="gallery-item"><img src="img/TEDx_Portada.jpg" alt="Foto Boda 4" data-image="img/TEDx_Portada.jpg"></div>
+                    <div class="gallery-item"><img src="img/Telefónica_Portada.jpg" alt="Foto Boda 5" data-image="img/Telefónica_Portada.jpg"></div>
+                    <div class="gallery-item"><img src="img/About_Portada.jpg" alt="Foto Boda 6" data-image="img/About_Portada.jpg"></div>
+                    <div class="gallery-item"><img src="img/Bodas_Portada.jpg" alt="Foto Boda 7" data-image="img/Bodas_Portada.jpg?v2"></div>
+                    <div class="gallery-item"><img src="img/Conciertos_Portada.jpg" alt="Foto Boda 8" data-image="img/Conciertos_Portada.jpg?v2"></div>
+                    <div class="gallery-item"><img src="img/Tactik_Portada.jpg" alt="Foto Boda 9" data-image="img/Tactik_Portada.jpg?v2"></div>
+                </div>
+            </div>
+            <button class="carousel-nav-btn" id="nextBtn">&#10095;</button>
+
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Mosaïk Eventos. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+    
+    <div class="lightbox-overlay" id="lightboxOverlay">
+        <button class="lightbox-close" id="lightboxClose">&times;</button>
+        <div class="lightbox-content">
+            <button class="lightbox-nav" id="lightboxPrev">&#10094;</button>
+            <img id="lightboxImage" src="" alt="">
+            <button class="lightbox-nav" id="lightboxNext">&#10095;</button>
+        </div>
+    </div>
+    <script>
+        // Lógica de navegación del menú
+        document.getElementById('menuToggle').addEventListener('click', function() {
+            document.getElementById('mainNav').classList.toggle('nav-open');
+        });
+
+        // ----------------------------------------------------
+        // LÓGICA CARRUSEL (FINITO - NO CÍCLICO)
+        // ----------------------------------------------------
+        const track = document.querySelector('.gallery-track');
+        const items = document.querySelectorAll('.gallery-item');
+        const prevBtnCar = document.getElementById('prevBtn');
+        const nextBtnCar = document.getElementById('nextBtn');
+        const itemsPerView = 3;
+        const itemWidth = 100 / itemsPerView; 
+        let currentSlide = 0;
+        const totalItems = items.length;
+        const maxSlide = totalItems - itemsPerView;
+
+        function updateCarousel() {
+            // Aplicamos el desplazamiento
+            const offset = -currentSlide * itemWidth;
+            track.style.transform = `translateX(${offset}%)`;
+
+            // Deshabilitar/Habilitar botones
+            prevBtnCar.disabled = currentSlide === 0;
+            nextBtnCar.disabled = currentSlide >= maxSlide;
+        }
+
+        function navigateCarousel(direction) {
+            let newSlide = currentSlide + direction;
+            
+            // Lógica finita: clamp the value
+            if (newSlide < 0) {
+                newSlide = 0; 
+            } else if (newSlide > maxSlide) {
+                newSlide = maxSlide; 
+            }
+            
+            if (newSlide !== currentSlide) {
+                currentSlide = newSlide;
+                updateCarousel();
+            }
+        }
+
+        prevBtnCar.addEventListener('click', () => navigateCarousel(-1));
+        nextBtnCar.addEventListener('click', () => navigateCarousel(1));
+
+        // ----------------------------------------------------
+        // LÓGICA LIGHTBOX (FINITO - NO CÍCLICO)
+        // ----------------------------------------------------
+        const overlay = document.getElementById('lightboxOverlay');
+        const closeBtn = document.getElementById('lightboxClose');
+        const prevBtnL = document.getElementById('lightboxPrev'); 
+        const nextBtnL = document.getElementById('lightboxNext'); 
+        const imageElement = document.getElementById('lightboxImage');
+        const gallery = document.getElementById('eventGallery1'); 
+        let images = [];
+        let currentIndex = -1;
+
+        function collectImages() {
+            images = Array.from(gallery.querySelectorAll('.gallery-item img')).map(img => ({
+                src: img.getAttribute('data-image') || img.src,
+                alt: img.alt,
+                element: img 
+            }));
+        }
+
+        function updateLightboxNav() {
+            // Deshabilitar botones de Lightbox al inicio/final
+            prevBtnL.disabled = currentIndex === 0;
+            nextBtnL.disabled = currentIndex === images.length - 1;
+        }
+
+        function openLightbox(index) {
+            currentIndex = index;
+            if (currentIndex >= 0 && currentIndex < images.length) {
+                imageElement.src = images[currentIndex].src;
+                imageElement.alt = images[currentIndex].alt;
+                overlay.style.display = 'flex';
+                document.body.style.overflow = 'hidden'; 
+                updateLightboxNav(); // Actualiza el estado de los botones
+            }
+        }
+
+        function closeLightbox() {
+            overlay.style.display = 'none';
+            document.body.style.overflow = 'auto'; 
+            currentIndex = -1;
+        }
+
+        function navigateLightbox(direction) {
+            let newIndex = currentIndex + direction;
+            
+            if (newIndex >= 0 && newIndex < images.length) {
+                openLightbox(newIndex);
+            }
+        }
+
+        // Evento de clic en la galería (delegado)
+        gallery.addEventListener('click', function(e) {
+            if (e.target.tagName === 'IMG') {
+                collectImages(); 
+                const index = images.findIndex(item => item.element === e.target);
+                openLightbox(index);
+            }
+        });
+
+        // Botones Lightbox
+        closeBtn.addEventListener('click', closeLightbox);
+        prevBtnL.addEventListener('click', () => navigateLightbox(-1));
+        nextBtnL.addEventListener('click', () => navigateLightbox(1));
+
+        // Teclado (Esc, Flechas)
+        document.addEventListener('keydown', function(e) {
+            if (overlay.style.display === 'flex') {
+                // Navegación Lightbox (Finito)
+                if (e.key === 'Escape') {
+                    closeLightbox();
+                } else if (e.key === 'ArrowLeft' && currentIndex > 0) {
+                    navigateLightbox(-1);
+                } else if (e.key === 'ArrowRight' && currentIndex < images.length - 1) {
+                    navigateLightbox(1);
+                }
+            } else {
+                // Navegación Carrusel (Finito)
+                 if (e.key === 'ArrowLeft') {
+                    navigateCarousel(-1);
+                } else if (e.key === 'ArrowRight') {
+                    navigateCarousel(1);
+                }
+            }
+        });
+
+        document.addEventListener('DOMContentLoaded', () => {
+             collectImages();
+             updateCarousel(); // Inicializar carrusel y botones
+        });
+
+        overlay.addEventListener('click', function(e) {
+            if (e.target === overlay) {
+                closeLightbox();
+            }
+        });
+    </script>
+</body>
+</html>
