@@ -145,6 +145,7 @@
             background-size: cover;
             background-position: center center;
             background-repeat: no-repeat;
+			max-height: 400px;
         }
 
         .hero h1 {
@@ -380,18 +381,29 @@
             box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
         }
         
-        /* 8. CTA Final - CON IMAGEN DE FONDO */
+        /* 8. CTA Final - CON IMAGEN DE FONDO (Desktop: 250px alto, Izquierda) */
         .cta-final {
             background-image: url('img/home/cta/cta-desktop.jpg'); 
             background-size: cover; 
             background-position: center center;
             background-repeat: no-repeat;
             
-            padding: 60px 0;
-            text-align: center;
+            /* ESTILOS DESKTOP */
+            padding: 0; 
+            height: 250px; /* Altura fija */
+            display: flex; /* Para centrado vertical */
+            align-items: center; /* Centrado vertical */
+            text-align: left; /* Alineación del contenido */
+            
             color: var(--blanco);
         }
         
+        /* FIX DESKTOP: Asegura que el contenedor respete max-width (con margin: 0 auto) y que el botón esté a la izquierda */
+        .cta-final .container {
+            margin: 0 auto; /* Restaura el centrado global y el max-width: 1200px */
+            text-align: left; /* Asegura que el botón dentro del contenedor se alinee a la izquierda */
+        }
+
         .cta-final h2 {
             font-size: 2.5em;
             margin-bottom: 30px;
@@ -442,6 +454,23 @@
             
             .cta-final {
                 background-image: url('img/home/cta/cta-tablet.jpg'); 
+                /* Revertir estilos de desktop para la altura */
+                height: auto; 
+                display: block; 
+                align-items: initial; 
+                padding: 60px 0; /* Restaurar el padding original para tablet */
+                text-align: left;
+            }
+            
+            /* Asegurar que el contenedor vuelva a centrarse en tablet, si es necesario */
+            .cta-final .container {
+                margin: 0 auto; /* Restaura el centrado horizontal del contenedor global */
+                text-align: left; /* Asegura alineación del botón dentro del contenedor */
+            }
+
+            /* ESTILO TABLET: Margen izquierdo de 50px para el botón */
+            .cta-final .btn-cta {
+                margin-left: 50px;
             }
 
             .menu-toggle {
@@ -535,6 +564,17 @@
             .cta-final {
                 background-image: url('img/home/cta/cta-mobile.jpg'); 
                 padding: 40px 0; 
+                text-align: center; /* Vuelve a centrar el botón en móvil */
+            }
+            
+            /* Sobrescribe la alineación 'left' del tablet para centrar el botón */
+            .cta-final .container {
+                text-align: center; 
+            }
+
+            /* Resetear el margen izquierdo para el botón en móvil */
+            .cta-final .btn-cta {
+                margin-left: 0; 
             }
 
             .client-logos {
@@ -564,6 +604,11 @@
             
             .gallery-title-wood {
                 margin-bottom: 30px; 
+            }
+        }
+        @media (max-width: 480px) {
+            .carousel-item img {
+                height: 200px; 
             }
         }
     </style>
@@ -657,6 +702,10 @@
                     <div class="carousel-item"><img src="img/home/evento-mosaik-03.jpg" alt="Detalle de evento Mosaïk 3"></div>
                     <div class="carousel-item"><img src="img/home/evento-mosaik-04.jpg" alt="Detalle de evento Mosaïk 4"></div>
                     <div class="carousel-item"><img src="img/home/evento-mosaik-05.jpg" alt="Detalle de evento Mosaïk 5"></div>
+					<div class="carousel-item"><img src="img/home/evento-mosaik-06.jpg" alt="Detalle de evento Mosaïk 6"></div>
+					<div class="carousel-item"><img src="img/home/evento-mosaik-07.jpg" alt="Detalle de evento Mosaïk 7"></div>
+					<div class="carousel-item"><img src="img/home/evento-mosaik-08.jpg" alt="Detalle de evento Mosaïk 8"></div>
+					<div class="carousel-item"><img src="img/home/evento-mosaik-09.jpg" alt="Detalle de evento Mosaïk 9"></div>
                     
                 </div>
 
