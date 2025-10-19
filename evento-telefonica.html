@@ -1,0 +1,859 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mosaïk Eventos | Telefónica</title>
+    
+    <link rel="icon" type="image/png" href="img/favicon.png"> 
+    
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    <style>
+        /* Paleta de Colores de Mosaïk Eventos */
+        :root {
+            --azul-principal: #3E649E;
+            --gris-oscuro: #29323C;
+            --gris-claro: #F2F2F0;
+            --blanco: #FFFFFF;
+        }
+
+        /* Estilos Globales */
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        html { height: 100%; }
+        body {
+            font-family: 'Open Sans', sans-serif; line-height: 1.6; color: var(--gris-oscuro);
+            background-color: var(--blanco);
+            display: flex; flex-direction: column; min-height: 100vh;
+        }
+        /* PADDING LATERAL BASE: 20px */
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+        h1, h2, h3 { font-family: 'Montserrat', sans-serif; font-weight: 700; margin-bottom: 20px; }
+        a { text-decoration: none; color: var(--azul-principal); }
+        
+        /* Contenido Principal (Añadimos padding para márgenes) */
+        .main-content { 
+            flex-grow: 1; 
+            background-color: var(--gris-claro); 
+            padding: 40px 0; 
+        }
+        .content-section { padding: 60px 0; }
+
+        /* ------------------------------------- */
+        /* 1. Header & Navegación (Uniforme) */
+        /* ------------------------------------- */
+        header { background-color: var(--blanco); box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05); padding: 15px 0; position: relative; }
+        .header-content { display: flex; justify-content: space-between; align-items: center; }
+        .logo a { display: block; line-height: 0; padding: 0; margin: 0; } 
+        .logo img { max-height: 60px; width: auto; }
+        nav ul { list-style: none; display: flex; align-items: center; padding: 0; }
+        nav ul li { margin-left: 30px; }
+        nav ul li a { color: var(--gris-oscuro); font-weight: 600; padding: 10px 0; display: block; transition: color 0.3s ease; }
+        nav ul li a:hover { color: var(--azul-principal); }
+        .menu-toggle { display: none; font-size: 1.8em; cursor: pointer; color: var(--gris-oscuro); }
+        
+        /* ------------------------------------- */
+        /* 2. Secciones Específicas del Evento */
+        /* ------------------------------------- */
+        
+        /* HERO DEFAULT (DESKTOP: > 992px) - Carga la imagen de MÁS alta resolución */
+        .hero-evento { 
+            background: url('img/telefonica/telefonica_hero_desktop.jpg') center/cover no-repeat; 
+            height: 400px;
+            color: var(--blanco);
+            display: flex;
+            justify-content: center; 
+            padding-bottom: 0; 
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
+            position: relative;
+        }
+        
+        .hero-evento::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0) 100%);
+            /* APLICAR BLUR AQUÍ */
+            backdrop-filter: blur(5px); 
+            z-index: 1;
+        }
+        /* Centrado vertical y horizontal del título */
+        .hero-content { 
+            z-index: 2; 
+            position: relative; 
+            display: flex;
+            flex-direction: column;
+            justify-content: center; /* Centrado vertical */
+            align-items: center; /* Centrado horizontal (CORREGIDO) */
+            height: 100%; 
+            width: 100%; 
+        }
+        .hero-content h1 { font-size: 3em; margin-bottom: 5px; }
+        
+        .event-info .container { max-width: 1200px; text-align: center; } 
+        .event-info h2 { color: var(--azul-principal); font-size: 2em; }
+        .event-info p { max-width: 1200px; margin: 0 auto 15px; padding: 0 20px;} 
+
+        /* Estilos de Galería Estilo Pinterest (Masonry con CSS Grid) */
+        .event-gallery {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            /* Fija a 4 columnas para escritorio */
+            grid-template-columns: repeat(4, 1fr); 
+            grid-gap: 15px; 
+            grid-auto-rows: 20px; 
+            padding: 0 20px; 
+        }
+        
+        .gallery-item {
+            /* VALOR BASE POR DEFECTO */
+            grid-row-end: span 7; 
+            overflow: hidden;
+            border-radius: 4px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
+            background-color: var(--blanco);
+        }
+
+        /* Clases de variación de altura: span 7 a span 10 (Rango solicitado) */
+        .gallery-item.h-short { grid-row-end: span 7; } 
+        .gallery-item.h-mid { grid-row-end: span 10; }  
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            cursor: zoom-in;
+            transition: transform 0.3s;
+        }
+        .gallery-item img:hover {
+            transform: scale(1.02);
+        }
+
+        /* ------------------------------------- */
+        /* 3. LIGHTBOX (VISOR DE FOTOS - FINITO) */
+        /* ------------------------------------- */
+        .lightbox-overlay {
+            display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+            background-color: rgba(0, 0, 0, 0.8); backdrop-filter: blur(5px);
+            z-index: 1000; align-items: center; justify-content: center; padding: 20px;
+            /* Cursor por defecto para indicar que es arrastrable */
+            cursor: grab; 
+        }
+        
+        .lightbox-overlay:active {
+            cursor: grabbing; 
+        }
+        
+        /* Mensaje de deslizar (Estilos ACTUALIZADOS: más pequeño, centrado y nowrap) */
+        .lightbox-swipe-hint {
+            position: absolute;
+            bottom: 20px; 
+            left: 50%;
+            transform: translateX(-50%);
+            color: var(--blanco);
+            font-size: 0.8em; 
+            font-weight: 400; 
+            font-style: italic;
+            z-index: 1002;
+            display: none; 
+            text-align: center; 
+            white-space: nowrap; /* <-- NUEVO: Forzar una sola línea */
+        }
+        
+        .lightbox-content {
+            position: relative; max-width: 90%; max-height: 90%; display: flex; align-items: center;
+        }
+        .lightbox-content img {
+            max-width: 100%; max-height: 80vh; object-fit: contain; border-radius: 5px;
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.7);
+            user-select: none; /* Prevenir selección de imagen al deslizar */
+        }
+        
+        /* Flechas de navegación */
+        .lightbox-nav-btn {
+            background: rgba(41, 50, 60, 0.9); 
+            color: var(--blanco); 
+            border: none; 
+            padding: 15px;
+            cursor: pointer; 
+            font-size: 2em; 
+            transition: background 0.3s, opacity 0.3s; 
+            z-index: 1001;
+            border-radius: 5px; 
+            position: absolute; 
+            top: 50%; 
+            transform: translateY(-50%);
+        }
+        .lightbox-nav-btn:hover { background: var(--azul-principal); }
+
+        /* Estilo de Flecha DESACTIVADA */
+        .lightbox-nav-btn:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+            background: rgba(41, 50, 60, 0.5);
+        }
+
+        /* Botón de cierre */
+        .lightbox-close {
+            position: absolute; 
+            top: 20px; 
+            right: 20px; 
+            font-size: 1.8em; 
+            padding: 10px 15px;
+            background: rgba(41, 50, 60, 0.9); 
+            color: var(--blanco); 
+            border: none; 
+            border-radius: 5px;
+            cursor: pointer; 
+            transition: background 0.3s; 
+            z-index: 1002;
+        }
+        .lightbox-close:hover { background: var(--azul-principal); }
+
+        /* Posición de los iconos fuera del área de la imagen grande (Desktop) */
+        #lightboxPrev3 { left: -60px; } 
+        #lightboxNext3 { right: -60px; } 
+
+        /* ------------------------------------- */
+        /* 4. Carrousel de Enlaces a Eventos */
+        /* ------------------------------------- */
+        .event-links-section {
+            background-color: var(--blanco);
+            padding: 60px 0;
+            text-align: center;
+        }
+        .event-links-section h2 {
+            color: var(--gris-oscuro);
+            margin-bottom: 30px;
+        }
+        
+        /* Mensaje de deslizar */
+        .swipe-hint {
+            font-size: 0.9em;
+            color: var(--gris-oscuro);
+            margin-top: -10px; 
+            margin-bottom: 20px;
+            font-style: italic;
+            display: none; 
+        }
+        
+        .carousel-wrapper {
+            max-width: 1160px; 
+            margin: 0 auto;
+            position: relative;
+            /* Padding de 20px para arreglar el margen en iPad Pro y pantallas pequeñas de escritorio */
+            padding: 0 20px; 
+        }
+
+        .event-links-carousel {
+            display: flex;
+            overflow-x: auto; 
+            scroll-snap-type: x mandatory; 
+            padding-bottom: 20px;
+            gap: 20px; 
+            padding: 0; 
+        }
+        
+        /* Ocultar barra de desplazamiento */
+        .event-links-carousel::-webkit-scrollbar { display: none; }
+        .event-links-carousel { -ms-overflow-style: none; scrollbar-width: none; }
+
+        .carousel-item {
+            flex: 0 0 280px; 
+            height: 200px;
+            position: relative;
+            overflow: hidden; 
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            transition: box-shadow 0.3s ease;
+            scroll-snap-align: start; 
+            display: block;
+        }
+        
+        .carousel-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            /* Filtro blanco y negro total */
+            filter: grayscale(100%);
+            transition: transform 0.3s ease, filter 0.3s ease;
+        }
+        
+        /* Efecto de crecer un poco y quitar filtro al hacer hover en desktop */
+        @media (min-width: 993px) {
+            .carousel-item:hover {
+                box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+            }
+            .carousel-item:hover img {
+                filter: grayscale(0%); 
+                transform: scale(1.05); 
+            }
+        }
+
+        /* Overlay con Blur más sutil y resalte */
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2em; 
+            font-weight: 700;
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(1px); 
+            background-color: rgba(0, 0, 0, 0.3);
+            transition: opacity 0.3s ease;
+        }
+        
+        /* Contenedor para el texto del título (ajuste para texto largo) */
+        .title-background {
+            color: var(--blanco);
+            border: 2px solid var(--blanco);
+            border-radius: 4px;
+            padding: 8px 12px; 
+            display: inline-block; 
+            text-align: center; 
+        }
+
+        /* Flechas de Navegación del Carrusel (Diseño "Clásica") */
+        .carousel-nav-btn {
+            display: none; 
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(41, 50, 60, 0.9);
+            color: var(--blanco);
+            border: none;
+            cursor: pointer;
+            font-size: 1.5em;
+            line-height: 40px; 
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            text-align: center;
+            z-index: 10;
+            transition: background 0.3s;
+        }
+
+        .carousel-nav-btn.active:hover { 
+            background: var(--azul-principal); 
+        }
+
+        /* Flecha desactivada */
+        .carousel-nav-btn:disabled, .carousel-nav-btn:disabled:hover {
+            background: #ccc; 
+            color: #999;
+            cursor: not-allowed;
+        }
+
+        /* Posicionamiento para que no se solapen con las imágenes (por defecto, desktop) */
+        #carouselPrev { left: -60px; }
+        #carouselNext { right: -60px; }
+
+
+        /* ------------------------------------- */
+        /* 5. Footer (Mínimo Solicitado) */
+        /* ------------------------------------- */
+        footer {
+            background-color: var(--gris-oscuro);
+            color: var(--gris-claro);
+            padding: 20px 0;
+            font-size: 0.9em;
+            text-align: center;
+        }
+        footer p {
+            margin: 0;
+        }
+
+        /* MEDIA QUERIES */
+
+        /* Tablet y Mobile (Menú Responsive y Mensaje de Deslizamiento) */
+        @media (max-width: 992px) {
+            
+            /* Menú Responsive */
+            .menu-toggle {
+                display: block; 
+                order: 2; 
+            }
+            #mainNav {
+                display: none;
+                position: absolute;
+                top: 90px; 
+                left: 0;
+                right: 0;
+                background-color: var(--blanco);
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+                z-index: 999;
+            }
+            #mainNav.nav-open {
+                display: block;
+            }
+            #mainNav ul {
+                flex-direction: column;
+                align-items: stretch; 
+                padding: 0;
+            }
+            #mainNav ul li {
+                margin: 0;
+                border-bottom: 1px solid var(--gris-claro);
+            }
+            #mainNav ul li a {
+                padding: 15px 20px;
+                text-align: left;
+                width: 100%;
+            }
+            #mainNav ul li:last-child {
+                border-bottom: none;
+            }
+            
+            /* Mostrar Mensaje de Deslizamiento en Carrusel (Tablet y Mobile) */
+            .swipe-hint {
+                display: block;
+            }
+            
+            /* Mostrar Mensaje de Deslizamiento en Lightbox (Tablet y Mobile) */
+            .lightbox-swipe-hint {
+                display: block;
+            }
+            
+            /* OCULTAR FLECHAS DE LIGHTBOX en Tablet y Mobile */
+            #lightboxPrev3, #lightboxNext3 { 
+                display: none; 
+            }
+            
+            /* Altura y centrado responsivo para el héroe */
+            .hero-evento { height: 300px; }
+            .hero-content h1 { font-size: 2.2em; }
+        }
+        
+        /* Desktop Wide (min-width: 1200px) - Flechas visibles */
+        @media (min-width: 1200px) {
+            .carousel-nav-btn { display: block; }
+            .carousel-wrapper {
+                max-width: 1160px; 
+                padding: 0; 
+            }
+            #carouselPrev { left: -60px; }
+            #carouselNext { right: -60px; }
+        }
+
+        /* Tablet (max-width: 992px y min-width: 768px) - Carga imagen de TABLET (media res) */
+        @media (max-width: 992px) and (min-width: 768px) {
+            /* Carga la imagen de Tablet (e.g., 1600px) */
+            .hero-evento {
+                background-image: url('img/telefonica/telefonica_hero_tablet.jpg'); 
+            }
+            
+            /* Ocultar flechas en tablet */
+            .carousel-nav-btn { display: none; }
+            .carousel-wrapper { 
+                max-width: 100%;
+                /* El padding: 0 20px; ya está en la definición general para este caso */
+                padding: 0 20px; 
+            }
+            
+            /* Galería Responsiva: 2 columnas en tablet */
+            .event-gallery {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        /* Mobile (max-width: 767px) - Carga imagen de MOBILE (baja res) */
+        @media (max-width: 767px) {
+             /* Carga la imagen de Mobile (e.g., 1200px) */
+            .hero-evento {
+                background-image: url('img/telefonica/telefonica_hero_mobile.jpg'); 
+            }
+            
+            /* Ocultar flechas en mobile */
+            .carousel-nav-btn { display: none; }
+            
+            .carousel-wrapper { 
+                max-width: 100%; 
+                /* El padding: 0 20px; ya está en la definición general para este caso */
+                padding: 0 20px; 
+            }
+            
+            .event-links-carousel {
+                 padding: 0 0 20px 0; 
+                 margin: 0; 
+            }
+            
+            .carousel-item {
+                flex: 0 0 85%; 
+                height: 160px;
+            }
+            
+            /* Reducción adicional de títulos en mobile */
+            .overlay {
+                font-size: 1em; 
+            }
+            .title-background {
+                padding: 6px 10px; 
+            }
+            
+            /* Galería Responsiva: 2 columnas en mobile ancho */
+            .event-gallery {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 600px) {
+             /* Galería Responsiva: 1 columna en móvil pequeño */
+            .event-gallery {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .carousel-item {
+                flex: 0 0 90%; 
+            }
+        }
+
+    </style>
+</head>
+<body>
+    
+    <header>
+        <div class="container header-content">
+            <div class="logo">
+                <a href="index.html">
+                    <img src="img/mosaik-logo.jpg" alt="Mosaïk Eventos">
+                </a>
+            </div>
+            
+            <div class="menu-toggle" id="menuToggle">
+                <i class="fas fa-bars"></i>
+            </div>
+
+            <nav id="mainNav">
+                <ul>
+                    <li><a href="eventos.html" style="color: var(--azul-principal);">Eventos</a></li> 
+                    <li><a href="#">Nosotros</a></li> 
+                    <li><a href="contacto.html">Contacto</a></li> 
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero-evento">
+        <div class="container hero-content">
+            <h1>Telefónica</h1>
+        </div>
+    </section>
+
+    <section class="content-section event-info">
+        <div class="container">
+            <h2>enlightED Ecuador</h2>
+            <p>En diciembre de 2019, Telefónica Ecuador llevó a cabo el foro enlightED Ecuador, un evento internacional enfocado en educación, tecnología e innovación. El encuentro reunió a expertos nacionales e internacionales para analizar los desafíos y oportunidades que la era digital presenta para la educación, y fomentar el diálogo sobre cómo mejorar el aprendizaje a través de los avances tecnológicos.</p>
+            <p>Nuestro equipo coordinó cada detalle —escenografía, logística, producción técnica y ambientación— para garantizar una experiencia impecable que reflejara la innovación y excelencia del evento. El resultado fue una jornada inspiradora, desarrollada con precisión y cuidado, que superó las expectativas de los asistentes y de los organizadores.</p>
+        </div>
+    </section>
+    
+    <section class="main-content">
+        <div class="event-gallery" id="eventGallery3">
+            <div class="gallery-item h-mid"><img src="img/telefonica/Evento_telefonica_1_thumb.jpg" alt="Foto Telefónica 1" data-full-src-desktop="img/telefonica/Evento_telefonica_1_full.jpg"></div>
+            <div class="gallery-item h-short"><img src="img/telefonica/Evento_telefonica_2_thumb.jpg" alt="Foto Telefónica 2" data-full-src-desktop="img/telefonica/Evento_telefonica_2_full.jpg"></div>
+            <div class="gallery-item h-mid"><img src="img/telefonica/Evento_telefonica_3_thumb.jpg" alt="Foto Telefónica 3" data-full-src-desktop="img/telefonica/Evento_telefonica_3_full.jpg"></div>
+            <div class="gallery-item h-short"><img src="img/telefonica/Evento_telefonica_4_thumb.jpg" alt="Foto Telefónica 4" data-full-src-desktop="img/telefonica/Evento_telefonica_4_full.jpg"></div>
+            <div class="gallery-item h-mid"><img src="img/telefonica/Evento_telefonica_5_thumb.jpg" alt="Foto Telefónica 5" data-full-src-desktop="img/telefonica/Evento_telefonica_5_full.jpg"></div>
+            <div class="gallery-item h-short"><img src="img/telefonica/Evento_telefonica_6_thumb.jpg" alt="Foto Telefónica 6" data-full-src-desktop="img/telefonica/Evento_telefonica_6_full.jpg"></div>
+            <div class="gallery-item h-mid"><img src="img/telefonica/Evento_telefonica_7_thumb.jpg" alt="Foto Telefónica 7" data-full-src-desktop="img/telefonica/Evento_telefonica_7_full.jpg"></div>
+            <div class="gallery-item h-short"><img src="img/telefonica/Evento_telefonica_8_thumb.jpg" alt="Foto Telefónica 8" data-full-src-desktop="img/telefonica/Evento_telefonica_8_full.jpg"></div>
+            <div class="gallery-item h-mid"><img src="img/telefonica/Evento_telefonica_9_thumb.jpg" alt="Foto Telefónica 9" data-full-src-desktop="img/telefonica/Evento_telefonica_9_full.jpg"></div>
+			<div class="gallery-item h-short"><img src="img/telefonica/Evento_telefonica_10_thumb.jpg" alt="Foto Telefónica 10" data-full-src-desktop="img/telefonica/Evento_telefonica_10_full.jpg"></div>
+        </div>
+    </section>
+    
+    <section class="event-links-section">
+        <div class="container">
+            <h2>Descubre Más de Nuestros Eventos</h2>
+            <p class="swipe-hint">Desliza para verlos todos</p> 
+        </div>
+        
+        <div class="carousel-wrapper">
+            <button class="carousel-nav-btn" id="carouselPrev">&#10094;</button>
+            <button class="carousel-nav-btn" id="carouselNext">&#10095;</button>
+
+            <div class="event-links-carousel" id="eventCarousel">
+                
+                <a href="evento-about.html" class="carousel-item">
+                    <img src="img/eventos-home/About_Portada.jpg" alt="Evento About">
+                    <div class="overlay"><span class="title-background">About</span></div>
+                </a>
+                
+                <a href="evento-tedxquito.html" class="carousel-item">
+                    <img src="img/eventos-home/TEDx_Portada.jpg" alt="Evento TEDxQuito">
+                    <div class="overlay"><span class="title-background">TEDxQuito</span></div>
+                </a>
+                
+                <a href="evento-corporativos.html" class="carousel-item">
+                    <img src="img/eventos-home/Eventos_Corporativos_Portada.jpg" alt="Eventos Corporativos">
+                    <div class="overlay"><span class="title-background">Eventos Corporativos</span></div>
+                </a>
+                
+                <a href="evento-bodas.html" class="carousel-item">
+                    <img src="img/eventos-home/Bodas_Portada.jpg" alt="Bodas">
+                    <div class="overlay"><span class="title-background">Bodas</span></div>
+                </a>
+                
+                <a href="evento-sociales.html" class="carousel-item">
+                    <img src="img/eventos-home/Eventos_Sociales_Portada.jpg" alt="Eventos Sociales">
+                    <div class="overlay"><span class="title-background">Eventos Sociales</span></div>
+                </a>
+                
+                <a href="conciertos.html" class="carousel-item">
+                    <img src="img/eventos-home/Conciertos_Portada.jpg" alt="Conciertos">
+                    <div class="overlay"><span class="title-background">Conciertos</span></div>
+                </a>
+                
+                <a href="tactik.html" class="carousel-item">
+                    <img src="img/eventos-home/Tactik_Portada.jpg" alt="Evento Tactik">
+                    <div class="overlay"><span class="title-background">Tactik</span></div>
+                </a>
+                
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Mosaïk Eventos. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+    
+    <div class="lightbox-overlay" id="lightboxOverlay3">
+        <button class="lightbox-close" id="lightboxClose3">&times;</button>
+        
+        <div class="lightbox-swipe-hint">Desliza para ver todas las fotos</div>
+        
+        <div class="lightbox-content">
+            <button class="lightbox-nav-btn" id="lightboxPrev3">&#10094;</button>
+            <img id="lightboxImage3" src="" alt="">
+            <button class="lightbox-nav-btn" id="lightboxNext3">&#10095;</button>
+        </div>
+    </div>
+    <script>
+        // Lógica de navegación del menú
+        document.getElementById('menuToggle').addEventListener('click', function() {
+            document.getElementById('mainNav').classList.toggle('nav-open');
+        });
+
+        // ----------------------------------------------------
+        // LÓGICA LIGHTBOX (FINITA - NO CÍCLICA CON SWIPE)
+        // ----------------------------------------------------
+        const overlay = document.getElementById('lightboxOverlay3');
+        const closeBtn = document.getElementById('lightboxClose3');
+        const prevBtn = document.getElementById('lightboxPrev3');
+        const nextBtn = document.getElementById('lightboxNext3');
+        const imageElement = document.getElementById('lightboxImage3');
+        const gallery = document.getElementById('eventGallery3'); 
+        let images = [];
+        let currentIndex = -1;
+        
+        // Variables para Swipe
+        let touchstartX = 0;
+        let touchendX = 0;
+        const swipeThreshold = 50; // Mínimo de píxeles para considerar un swipe
+
+        function collectImages() {
+            // Recolecta todas las imágenes dentro de la galería
+            images = Array.from(gallery.querySelectorAll('.gallery-item img')).map(img => ({
+                // Almacenamos el SRC de la miniatura para usarlo como imagen de mobile/tablet
+                src: img.src, 
+                // Usamos data-full-src-desktop para la versión grande
+                fullSrcDesktop: img.getAttribute('data-full-src-desktop') || img.src,
+                alt: img.alt,
+                element: img 
+            }));
+        }
+
+        // Desactiva los botones en los límites
+        function updateLightboxNav() {
+            prevBtn.disabled = currentIndex === 0;
+            nextBtn.disabled = currentIndex === images.length - 1;
+        }
+
+        function openLightbox(index) {
+            currentIndex = index;
+            if (currentIndex >= 0 && currentIndex < images.length) {
+                
+                // Lógica de selección de imagen responsive: 
+                // Si es Desktop (> 992px), usa data-full-src-desktop. Si no (Mobile/Tablet), usa el src de la miniatura.
+                const selectedSrc = window.innerWidth > 992 
+                    ? images[currentIndex].fullSrcDesktop 
+                    : images[currentIndex].src; 
+                    
+                imageElement.src = selectedSrc; // Carga la imagen seleccionada
+                imageElement.alt = images[currentIndex].alt;
+                overlay.style.display = 'flex';
+                document.body.style.overflow = 'hidden'; 
+                updateLightboxNav(); 
+            }
+        }
+
+        function closeLightbox() {
+            overlay.style.display = 'none';
+            document.body.style.overflow = 'auto'; 
+            currentIndex = -1;
+        }
+
+        // Previene la navegación más allá de los límites
+        function navigateLightbox(direction) {
+            let newIndex = currentIndex + direction;
+            
+            // Si el nuevo índice está dentro de los límites válidos, navega
+            if (newIndex >= 0 && newIndex < images.length) {
+                openLightbox(newIndex);
+            }
+        }
+
+        gallery.addEventListener('click', function(e) {
+            if (e.target.tagName === 'IMG') {
+                collectImages(); 
+                const index = images.findIndex(item => item.element === e.target);
+                openLightbox(index);
+            }
+        });
+
+        closeBtn.addEventListener('click', closeLightbox);
+        prevBtn.addEventListener('click', () => navigateLightbox(-1));
+        nextBtn.addEventListener('click', () => navigateLightbox(1));
+
+        document.addEventListener('keydown', function(e) {
+            if (overlay.style.display === 'flex') {
+                if (e.key === 'Escape') {
+                    closeLightbox();
+                } 
+                // Navegación de teclado finita
+                else if (e.key === 'ArrowLeft' && currentIndex > 0) {
+                    navigateLightbox(-1);
+                } else if (e.key === 'ArrowRight' && currentIndex < images.length - 1) {
+                    navigateLightbox(1);
+                }
+            }
+        });
+
+        document.addEventListener('DOMContentLoaded', collectImages);
+
+        overlay.addEventListener('click', function(e) {
+            if (e.target === overlay) {
+                closeLightbox();
+            }
+        });
+        
+        // --- Lógica de Swipe (Arrastrar) ---
+        overlay.addEventListener('touchstart', e => {
+            if (overlay.style.display === 'flex') {
+                touchstartX = e.changedTouches[0].screenX;
+            }
+        }, false);
+
+        overlay.addEventListener('touchend', e => {
+            if (overlay.style.display === 'flex') {
+                touchendX = e.changedTouches[0].screenX;
+                handleSwipe();
+            }
+        }, false);
+        
+        // Para ratón (Desktop swipe opcional)
+        overlay.addEventListener('mousedown', e => {
+            if (overlay.style.display === 'flex') {
+                touchstartX = e.screenX;
+                // Prevenir el comportamiento por defecto de arrastrar (como seleccionar texto)
+                e.preventDefault(); 
+            }
+        }, false);
+
+        overlay.addEventListener('mouseup', e => {
+            if (overlay.style.display === 'flex') {
+                touchendX = e.screenX;
+                handleSwipe();
+            }
+        }, false);
+
+        function handleSwipe() {
+            // Swipe a la DERECHA (prev)
+            if (touchendX < touchstartX && (touchstartX - touchendX) > swipeThreshold) {
+                navigateLightbox(1);
+            }
+            // Swipe a la IZQUIERDA (next)
+            if (touchendX > touchstartX && (touchendX - touchstartX) > swipeThreshold) {
+                navigateLightbox(-1);
+            }
+        }
+
+        // ----------------------------------------------------
+        // LÓGICA DE NAVEGACIÓN DEL CARRUSEL DE ENLACES
+        // ----------------------------------------------------
+        const carousel = document.getElementById('eventCarousel');
+        const prevCarouselBtn = document.getElementById('carouselPrev');
+        const nextCarouselBtn = document.getElementById('carouselNext');
+        const itemWidth = 280; // Ancho fijo de cada item
+        const gap = 20; // Espacio entre items
+
+        function updateCarouselNav() {
+            if (!carousel) return;
+            
+            // Lógica para determinar si se está al inicio (scrollLeft es 0) o al final
+            const maxScrollLeft = carousel.scrollWidth - carousel.clientWidth;
+            
+            const threshold = 5; 
+            
+            const isAtStart = carousel.scrollLeft <= threshold; 
+            const isAtEnd = carousel.scrollLeft >= maxScrollLeft - threshold; 
+
+            // Botón Anterior
+            prevCarouselBtn.disabled = isAtStart;
+            if (isAtStart) {
+                prevCarouselBtn.classList.remove('active');
+            } else {
+                prevCarouselBtn.classList.add('active');
+            }
+
+            // Botón Siguiente
+            nextCarouselBtn.disabled = isAtEnd;
+            if (isAtEnd) {
+                nextCarouselBtn.classList.remove('active');
+            } else {
+                nextCarouselBtn.classList.add('active');
+            }
+        }
+
+        function navigateCarousel(direction) {
+            if (!carousel) return;
+            // Distancia de desplazamiento es el ancho de una imagen más el gap
+            const scrollDistance = itemWidth + gap;
+            
+            carousel.scrollBy({
+                left: direction * scrollDistance,
+                behavior: 'smooth'
+            });
+
+            // Pequeño delay para asegurar que el scroll se complete antes de actualizar los botones
+            setTimeout(updateCarouselNav, 400); 
+        }
+
+        if (carousel) {
+            prevCarouselBtn.addEventListener('click', () => navigateCarousel(-1));
+            nextCarouselBtn.addEventListener('click', () => navigateCarousel(1));
+            
+            // Actualizar al cargar y al hacer scroll
+            carousel.addEventListener('scroll', updateCarouselNav);
+            window.addEventListener('resize', updateCarouselNav); 
+            
+            // Llamada inicial para establecer el estado de los botones
+            updateCarouselNav(); 
+        }
+    </script>
+</body>
+</html>

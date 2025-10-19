@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mosaïk Eventos | Eventos</title>
+    
+    <link rel="icon" type="image/png" href="img/favicon.png"> 
+    
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    <style>
+        /* Paleta de Colores de Mosaïk Eventos */
+        :root {
+            --azul-principal: #3E649E;
+            --gris-oscuro: #29323C;
+            --gris-claro: #F2F2F0;
+            --blanco: #FFFFFF;
+        }
+
+        /* Estilos Globales y Sticky Footer */
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        html { height: 100%; }
+        body {
+            font-family: 'Open Sans', sans-serif; line-height: 1.6; color: var(--gris-oscuro);
+            background-color: var(--blanco);
+            display: flex; flex-direction: column; min-height: 100vh;
+        }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+        h1, h2, h3 { font-family: 'Montserrat', sans-serif; font-weight: 700; margin-bottom: 20px; }
+        a { text-decoration: none; color: var(--azul-principal); }
+        
+        /* Contenido Principal para Sticky Footer */
+        .main-content { 
+            flex-grow: 1; 
+            padding: 60px 0; 
+            background-color: var(--gris-claro); 
+        }
+
+        /* ------------------------------------- */
+        /* 1. Header & Navegación (ALTURA UNIFORME) */
+        /* ------------------------------------- */
+        header { 
+            background-color: var(--blanco); 
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05); 
+            padding: 15px 0; 
+            position: relative; 
+        }
+        .header-content { 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+        }
+        
+        /* AJUSTE CLAVE PARA EL LOGO */
+        .logo a {
+            display: block;
+            line-height: 0; 
+            padding: 0;
+            margin: 0;
+        }
+        .logo img { 
+            max-height: 60px; 
+            width: auto; 
+        }
+        
+        nav ul { 
+            list-style: none; 
+            display: flex; 
+            align-items: center; 
+            padding: 0;
+        }
+        nav ul li { margin-left: 30px; }
+        nav ul li a { 
+            color: var(--gris-oscuro); 
+            font-weight: 600; 
+            padding: 10px 0; 
+            display: block; 
+            transition: color 0.3s ease; 
+        }
+        
+        nav ul li a:hover { color: var(--azul-principal); }
+        .menu-toggle { display: none; font-size: 1.8em; cursor: pointer; color: var(--gris-oscuro); }
+        
+        /* ------------------------------------- */
+        /* 2. ESTILOS ESPECÍFICOS: DISEÑO MOSAICO */
+        /* ------------------------------------- */
+
+        .event-gallery.mosaic {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); 
+            grid-gap: 20px;
+            grid-auto-rows: 10px; 
+        }
+
+        .event-card.mosaic {
+            position: relative;
+            overflow: hidden;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            background-color: var(--blanco);
+            transition: box-shadow 0.3s, transform 0.3s; 
+            display: block;
+            
+            grid-row-end: span 12; 
+        }
+        
+        /* Variaciones de altura: Rango entre span 10 y span 15 */
+        .event-card.mosaic:nth-child(3n) { grid-row-end: span 15; } 
+        .event-card.mosaic:nth-child(4n+1) { grid-row-end: span 14; } 
+        .event-card.mosaic:nth-child(2n) { grid-row-end: span 10; } 
+
+
+        .event-card.mosaic img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s filter 0.5s;
+            filter: grayscale(0.2); 
+        }
+        
+        /* Estilos del Overlay y Texto (SIEMPRE VISIBLE) */
+        .event-overlay {
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-color: rgba(0, 0, 0, 0.2); 
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* ESTILO HOVER DE ESCRITORIO (Crecimiento y Sombra) */
+        @media (min-width: 993px) {
+            .event-card.mosaic:hover {
+                transform: scale(1.02); 
+                box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); 
+                z-index: 1; 
+            }
+            .event-card.mosaic:hover img {
+                transform: scale(1.05);
+                filter: grayscale(0) blur(1px); 
+            }
+            .event-card.mosaic:hover .event-overlay {
+                background-color: rgba(0, 0, 0, 0.35); 
+            }
+        }
+        
+        .event-title {
+            color: var(--blanco);
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.1em; 
+            font-weight: 700;
+            text-align: center;
+            opacity: 1; 
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
+            
+            border: 2px solid var(--blanco);
+            padding: 5px 15px; 
+            border-radius: 4px;
+            max-width: 80%; 
+        }
+
+        /* ------------------------------------- */
+        /* 3. Footer */
+        /* ------------------------------------- */
+        footer { background-color: var(--gris-oscuro); color: var(--gris-claro); text-align: center; padding: 20px 0; font-size: 0.9em; }
+
+        /* ------------------------------------- */
+        /* 4. MEDIA QUERIES (Responsive) */
+        /* ------------------------------------- */
+        @media (max-width: 992px) {
+            .menu-toggle { display: block; }
+            nav {
+                position: absolute; top: 90px; right: 0; width: 100%; background-color: var(--blanco);
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); z-index: 100; display: none; padding: 10px 0;
+            }
+            nav ul { flex-direction: column; align-items: flex-start; padding: 0; }
+            nav ul li { margin: 0; width: 100%; text-align: center; border-bottom: 1px solid var(--gris-claro); }
+            nav ul li:last-child { border-bottom: none; }
+            nav ul li a { padding: 15px 20px; color: var(--gris-oscuro); }
+            nav ul li a:hover { color: var(--azul-principal); background-color: var(--gris-claro); }
+            .nav-open { display: block; }
+            
+            /* Ajuste de Mosaico en móvil (una sola columna, altura auto) */
+            .event-gallery.mosaic {
+                grid-template-columns: 1fr;
+                grid-auto-rows: minmax(200px, auto); 
+                grid-gap: 25px;
+            }
+            .event-card.mosaic { 
+                grid-row-end: span 1; 
+                aspect-ratio: 16/9;
+            }
+            .event-card.mosaic:nth-child(2n), 
+            .event-card.mosaic:nth-child(3n), 
+            .event-card.mosaic:nth-child(4n+1) { grid-row-end: span 1; } 
+        }
+    </style>
+</head>
+<body>
+    
+    <header>
+        <div class="container header-content">
+            <div class="logo">
+                <a href="index.html">
+                    <img src="img/mosaik-logo.jpg" alt="Mosaïk Eventos">
+                </a>
+            </div>
+            
+            <div class="menu-toggle" id="menuToggle">
+                <i class="fas fa-bars"></i>
+            </div>
+
+            <nav id="mainNav">
+                <ul>
+                    <li><a href="eventos.html" style="color: var(--azul-principal);">Eventos</a></li> 
+                    <li><a href="#">Nosotros</a></li> 
+                    <li><a href="contacto.html">Contacto</a></li> 
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="main-content">
+        <div class="container">
+            <h1>Nuestros Proyectos</h1>
+            <p style="margin-bottom: 50px;">Nuestra misión es transformar un sueño en una experiencia única, cuidando cada detalle desde la inspiración hasta la ejecución, para que cada evento refleje auténticamente a quien lo vive.</p>
+            
+            <div class="event-gallery mosaic">
+			
+				<a href="evento-telefonica.html" class="event-card mosaic">
+                    <img src="img/eventos-home/Telefonica_Portada.jpg" alt="Telefónica">
+                    <div class="event-overlay"><span class="event-title">Telefónica</span></div>
+                </a>
+                
+                <a href="evento-about.html" class="event-card mosaic">
+                    <img src="img/eventos-home/About_Portada.jpg" alt="About">
+                    <div class="event-overlay"><span class="event-title">About</span></div>
+                </a>
+                
+				<a href="evento-tedxquito.html" class="event-card mosaic">
+                    <img src="img/eventos-home/TEDx_Portada.jpg" alt="TEDxQuito">
+                    <div class="event-overlay"><span class="event-title">TEDxQuito</span></div>
+                </a>
+				
+				<a href="evento-corporativos.html" class="event-card mosaic">
+                    <img src="img/eventos-home/Eventos_Corporativos_Portada.jpg" alt="Cena Corporativa">
+                    <div class="event-overlay"><span class="event-title">Evenos Corporativos</span></div>
+                </a>
+                
+				<a href="evento-sociales.html" class="event-card mosaic">
+                    <img src="img/eventos-home/Eventos_Sociales_Portada.jpg" alt="Pasarela">
+                    <div class="event-overlay"><span class="event-title">Eventos Sociales</span></div>
+                </a>
+				
+                <a href="evento-tactik.html" class="event-card mosaic">
+                    <img src="img/eventos-home/Tactik_Portada.jpg" alt="Tactik">
+                    <div class="event-overlay"><span class="event-title">Tactik</span></div>
+                </a>
+				
+				<a href="evento-bodas.html" class="event-card mosaic">
+                    <img src="img/eventos-home/Bodas_Portada.jpg" alt="Bodas">
+                    <div class="event-overlay"><span class="event-title">Bodas</span></div>
+                </a>             
+                
+				<a href="evento-plantilla-foco-v2.html" class="event-card mosaic">
+                    <img src="img/eventos-home/Conciertos_Portada.jpg" alt="Conciertos">
+                    <div class="event-overlay"><span class="event-title">Conciertos</span></div>
+                </a>
+
+            </div>
+            
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>© 2025 Mosaïk Eventos. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById('menuToggle').addEventListener('click', function() {
+            document.getElementById('mainNav').classList.toggle('nav-open');
+        });
+    </script>
+</body>
+</html>
