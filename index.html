@@ -270,33 +270,8 @@
             object-fit: cover; 
             display: block; 
         }
-
-        .carousel-button {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            background-color: rgba(0,0,0,0.5);
-            color: var(--blanco);
-            border: none;
-            padding: 10px 15px;
-            cursor: pointer;
-            font-size: 1.5em;
-            z-index: 10;
-            border-radius: 4px;
-            transition: background-color 0.3s ease;
-        }
-
-        .carousel-button:hover {
-            background-color: var(--azul-principal);
-        }
-
-        .carousel-button.prev {
-            left: 10px;
-        }
-
-        .carousel-button.next {
-            right: 10px;
-        }
+        
+        /* SE ELIMINARON LOS ESTILOS DE .carousel-button */
 
         .carousel-dots {
             text-align: center;
@@ -708,10 +683,8 @@
 					<div class="carousel-item"><img src="img/home/evento-mosaik-09.jpg" alt="Detalle de evento Mosaïk 9"></div>
                     
                 </div>
-
-                <button class="carousel-button prev" aria-label="Anterior"><i class="fas fa-chevron-left"></i></button>
-                <button class="carousel-button next" aria-label="Siguiente"><i class="fas fa-chevron-right"></i></button>
-            </div>
+                
+                </div>
             
             <div class="carousel-dots" id="carouselDots">
             </div>
@@ -777,8 +750,7 @@
         const carouselContainer = document.getElementById('carouselContainer');
         const carouselSlides = document.getElementById('carouselSlides');
         const carouselItems = document.querySelectorAll('.carousel-item');
-        const prevButton = document.querySelector('.carousel-button.prev');
-        const nextButton = document.querySelector('.carousel-button.next');
+        // SE ELIMINARON prevButton y nextButton
         const carouselDotsContainer = document.getElementById('carouselDots');
         
         let currentIndex = 0;
@@ -854,14 +826,7 @@
             }
         });
 
-        prevButton.addEventListener('click', () => {
-            goToPrev();
-            resetAutoSlide();
-        });
-        nextButton.addEventListener('click', () => {
-            goToNext();
-            resetAutoSlide();
-        });
+        // SE ELIMINARON LOS EVENT LISTENERS DE prevButton y nextButton
         
         window.addEventListener('resize', updateCarousel);
         
