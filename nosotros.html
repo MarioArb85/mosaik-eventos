@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-translate="pageTitle">Mosaïk Eventos | Nosotros</title>
+    
+    <link rel="icon" type="image/png" href="img/favicon.png"> 
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    <style>
+        /* Paleta de Colores de Mosaïk Eventos */
+        :root {
+            --azul-principal: #3E649E;
+            --gris-oscuro: #29323C;
+			--gris-oscuro-hover:#49596b;
+            --gris-claro: #F2F2F0;
+            --blanco: #FFFFFF;
+            --fondo-madera: url('img/home/fondo-madera-clara.png'); 
+        }
+
+        /* Estilos Globales (Reutilizados) */
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Open Sans', sans-serif; line-height: 1.6; color: var(--gris-oscuro); background-color: var(--blanco); }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+        h1, h2, h3 { font-family: 'Montserrat', sans-serif; font-weight: 700; margin-bottom: 20px; }
+        a { text-decoration: none; color: var(--azul-principal); }
+		.logo a { display: block; line-height: 0; padding: 0; margin: 0; }
+        .btn-cta { display: inline-block; padding: 12px 25px; background-color: var(--azul-principal); color: var(--blanco) !important; border-radius: 4px; font-family: 'Montserrat', sans-serif; font-weight: 700; transition: background-color 0.3s; text-transform: uppercase; }
+        .btn-cta:hover { background-color: #315082; }
+        
+        /* HEADER */
+        header { background-color: var(--blanco); box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05); padding: 15px 0; position: relative; }
+        .header-content { display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-size: 0; }
+        .logo img { max-height: 60px; width: auto; }
+        nav ul { list-style: none; display: flex; align-items: center; }
+        nav ul li { margin-left: 30px; }
+        nav ul li a { color: var(--gris-oscuro); font-weight: 600; padding: 10px 0; display: block; transition: color 0.3s ease; }
+        nav ul li a:hover { color: var(--azul-principal); }
+        nav ul li .active-link { color: var(--azul-principal); font-weight: 700; }
+        .menu-toggle { display: none; font-size: 1.8em; cursor: pointer; color: var(--gris-oscuro); }
+        
+        /* HERO */
+        .hero-internal { 
+            background-color: var(--gris-oscuro); 
+            color: var(--blanco); 
+            padding: 0;
+            height: 400px; 
+            display: flex; 
+            align-items: center;
+            justify-content: center;
+            position: relative; 
+            overflow: hidden; /* Necesario para contener el pseudo-elemento blur */
+        }
+        
+        /* Nuevo pseudo-elemento ::after para la imagen de fondo con Blur */
+        .hero-internal::after {
+            content: '';
+            position: absolute;
+            top: -10px; /* Valor negativo para asegurar que el desenfoque no muestre bordes */
+            left: -10px;
+            right: -10px;
+            bottom: -10px;
+            
+            /* Imagen por defecto (Desktop) */
+            background-image: url('img/nosotros/hero-desktop.jpg'); 
+            background-size: cover; 
+            background-position: center center; 
+            background-repeat: no-repeat; 
+            
+            filter: blur(3px); /* BLUR SOLICITADO */
+            z-index: 0; /* Fondo */
+        }
+        
+        /* El pseudo-elemento ::before se mantiene para el overlay oscuro */
+        .hero-internal::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0,0,0,0.3);
+            z-index: 1; /* Encima del blur, debajo del texto */
+        }
+        .hero-internal .container { z-index: 2; } /* El texto se mantiene nítido */
+        .hero-internal h1 { font-size: 3em; margin-bottom: 0; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.9); }
+        
+        .wood-separator { background-image: var(--fondo-madera); background-size: cover; background-repeat: repeat; background-position: center center; height: 35px; }
+        
+        /* FOOTER */
+        footer { background-color: var(--gris-oscuro); color: var(--gris-claro); text-align: center; padding: 20px 0; font-size: 0.9em; }
+
+        /* --- ESTILOS DE LA FUNDADORA --- */
+        .founder-section { padding: 60px 0; background-color: var(--gris-claro); }
+        .founder-content { 
+            display: flex; 
+            gap: 50px; 
+            align-items: flex-start;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        .founder-portrait { flex-shrink: 0; width: 350px; }
+        .founder-portrait img {
+            width: 100%;
+            height: 450px;
+            object-fit: cover;
+            border-radius: 8px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+            /* Borde eliminado */
+        }
+        .founder-text { flex-grow: 1; }
+        .founder-text h2 { color: var(--azul-principal); margin-top: 0; margin-bottom: 5px; }
+        .founder-text p.role { font-size: 1.2em; font-style: italic; margin-bottom: 20px; }
+        .bio-text { font-size: 1.1em; text-align: justify; }
+
+        /* SECCIÓN DE VALORES (Estructura de Icono sobre Texto, Blanco) */
+        .values-discreet-section {
+            background-color: var(--gris-oscuro); 
+            color: var(--blanco); 
+            padding: 50px 0; 
+            text-align: center;
+        }
+        .values-discreet-section h3 {
+            color: var(--blanco);
+            font-size: 1.8em;
+            margin-bottom: 40px;
+        }
+        .values-list {
+            display: flex;
+            justify-content: space-around; 
+            gap: 20px; 
+            flex-wrap: wrap; 
+        }
+        /* Contenedor del principio: centrado vertical/horizontal y ancho completo */
+        .values-list div {
+            display: flex;
+            flex-direction: column; /* Icono encima del texto */
+            align-items: center; 
+            max-width: 30%; 
+            padding: 0 20px;
+            border-right: 1px solid rgba(255, 255, 255, 0.3); /* Separador entre elementos */
+            flex-grow: 1;
+        }
+        .values-list div:last-child {
+            border-right: none;
+        }
+        
+        /* Icono (Sin círculo/elipse) - TAMAÑO ACTUALIZADO A 2.5em */
+        .values-list i {
+            font-size: 2.5em; 
+            color: var(--blanco); 
+            margin-bottom: 10px; 
+        }
+        
+        /* Texto del Principio - TAMAÑO ACTUALIZADO A 1em */
+        .values-list span {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            color: var(--blanco);
+            font-size: 1em; 
+            letter-spacing: 0.5px;
+            text-align: center;
+        }
+        
+        /* SECCIÓN DE EVENTOS */
+        .event-gallery-section {
+            padding: 60px 0;
+            background-color: var(--blanco);
+            text-align: center;
+        }
+        .event-gallery-section h2 { margin-bottom: 40px; } 
+        
+        .masonry-event-gallery {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr); 
+            grid-gap: 15px; 
+            grid-auto-rows: 20px; 
+            padding: 0 20px; 
+        }
+        .gallery-item {
+            grid-row-end: span 8; 
+            overflow: hidden;
+            border-radius: 4px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
+            background-color: var(--blanco);
+        }
+        .gallery-item.h-mid { grid-row-end: span 11; } 
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+        .cta-final { 
+            background: none; 
+            padding: 40px 0 0; 
+            text-align: center; 
+        }
+
+
+        /* --- MEDIA QUERIES --- */
+        
+        @media (max-width: 992px) {
+            /* 1. NAVEGACIÓN RESPONSIVE (TABLET) */
+            .header-content { align-items: flex-start; } 
+            .menu-toggle { display: block; order: 2; margin-left: 20px; } /* Mostrar toggle */
+            
+            nav { 
+                position: absolute; 
+                top: 90px; 
+                left: 0; 
+                right: 0; 
+                background-color: var(--blanco); 
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
+                z-index: 100; 
+                max-height: 0; 
+                overflow: hidden; 
+                transition: max-height 0.3s ease-out; 
+            }
+            nav.nav-open { 
+                max-height: 300px; 
+            }
+            nav ul { 
+                flex-direction: column; 
+                width: 100%; 
+                padding: 10px 0; 
+            }
+            nav ul li { 
+                margin: 0; 
+                width: 100%; 
+                text-align: center; 
+            }
+            nav ul li a { 
+                padding: 15px 20px; 
+                border-bottom: 1px solid var(--gris-claro); 
+            }
+            nav ul li:last-child a { 
+                border-bottom: none; 
+            }
+            
+            /* Imagen para Tablet */
+            .hero-internal::after { 
+                background-image: url('img/nosotros/hero-tablet.jpg'); 
+            }
+            
+            /* AJUSTE FUNDADORA: Foto a la izquierda, texto a la derecha en Tablet */
+            .founder-content { 
+                flex-direction: row; 
+                align-items: flex-start; 
+                gap: 30px; 
+            }
+            
+            .founder-portrait { 
+                width: 40%; 
+                max-width: 300px; 
+                margin-bottom: 0; 
+            }
+            .founder-portrait img { 
+                height: 350px; 
+                width: 100%; 
+            }
+            .founder-text { 
+                width: 60%; 
+                text-align: left; 
+            }
+            .founder-text h2, 
+            .founder-text p.role { 
+                text-align: left; 
+            }
+            .bio-text p {
+                text-align: justify; 
+            }
+            
+            .masonry-event-gallery { grid-template-columns: repeat(2, 1fr); }
+
+            /* Valores Responsive (Tablet): 2 columnas */
+            .values-list div {
+                max-width: 45%; 
+                margin-bottom: 0; 
+                border-right: none; 
+            }
+        }
+        
+        @media (max-width: 767px) {
+            .hero-internal { height: 250px; }
+            /* Imagen para Mobile */
+            .hero-internal::after { 
+                background-image: url('img/nosotros/hero-mobile.jpg'); 
+            }
+            
+            /* Centrado de textos (Fundadora y Hero) */
+            .hero-internal h1 { text-align: center; } 
+            
+            /* El texto se centra en móvil */
+            .founder-text h2, 
+            .founder-text p.role, 
+            .bio-text { 
+                text-align: center; 
+            }
+            .bio-text p {
+                /* Sobrescribe text-align: justify/left del estilo base/tablet */
+                text-align: center; 
+            }
+            
+            /* AJUSTES PARA MOBILE (Vertical y centrado) */
+            .founder-content { 
+                flex-direction: column; 
+                align-items: center;
+                gap: 0; 
+            }
+            .founder-portrait {
+                width: 100%;
+                max-width: 300px;
+                margin-bottom: 20px; 
+            }
+            .founder-text {
+                width: 100%;
+            }
+            
+            /* CORRECCIÓN: VALORES APILADOS EN MOBILE */
+            .values-list {
+                flex-direction: column; /* FUERZA EL APILAMIENTO DE LOS ELEMENTOS HIJOS */
+                align-items: center; /* Centra los hijos en el contenedor vertical */
+            }
+            .values-list div {
+                max-width: 100%; /* Ocupa el ancho completo */
+                padding: 0 10px; /* Reducir padding en mobile */
+                margin-bottom: 30px; 
+                border-right: none; 
+            }
+            .values-list div:last-child { 
+                margin-bottom: 0;
+            }
+            
+            .masonry-event-gallery { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    
+    <header>
+        <div class="container header-content">
+            <div class="logo">
+                <a href="index.html"><img src="img/mosaik-logo.jpg" alt="Mosaïk Eventos"></a>
+            </div>
+            <div class="menu-toggle" id="menuToggle"><i class="fas fa-bars"></i></div>
+            <nav id="mainNav">
+                <ul>
+                    <li><a href="eventos.html" data-translate="navEvents">Eventos</a></li> 
+                    <li><a href="#" class="active-link" data-translate="navAbout">Nosotros</a></li>
+                    <li><a href="contacto.html" data-translate="navContact">Contacto</a></li> 
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero-internal">
+        <div class="container">
+            <h1 data-translate="heroTitle">Mosaïk Eventos</h1> 
+        </div>
+    </section>
+    
+    <div class="wood-separator"></div>
+
+    <section class="founder-section">
+        <div class="container">
+            <div class="founder-content">
+                <div class="founder-portrait">
+                    <img src="img/nosotros/carolina_pallares.jpg" alt="Carolina Pallares">
+                </div>
+                <div class="founder-text">
+                    <h2 data-translate="founderName">Carolina Pallares</h2>
+                    <p class="role" data-translate="founderRole">Fundadora</p>
+                    
+                    <div class="bio-text">
+                        <p data-translate="bioText">
+                            Desde pequeña, la curiosidad por el mundo y las diferentes culturas me llevó a descubrir mi verdadera pasión: crear experiencias que conecten personas y emociones. Bilingüe y formada en Hospitalidad y Organización de Eventos en Suiza y Estados Unidos, aprendí a combinar la precisión suiza con la calidez latina. Mi camino profesional me ha llevado a trabajar en Italia, Estados Unidos, Ecuador y España, explorando distintas formas de celebrar, comunicar y emocionar. Después de más de 10 años en la industria, sigo maravillándome al ver cómo una idea se transforma en una experiencia inolvidable, diseñada con detalle, alma y propósito.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="values-discreet-section">
+        <div class="container">
+            <div class="values-list">
+                <div data-translate="value1">
+                    <i class="fas fa-water"></i> 
+                    <span>Adaptabilidad</span>
+                </div>
+                <div data-translate="value2">
+                    <i class="fas fa-handshake"></i>
+                    <span>Transparencia</span>
+                </div>
+                <div data-translate="value3">
+                    <i class="fas fa-award"></i>
+                    <span>Excelencia</span>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="event-gallery-section">
+        <div class="container">
+            <h2 data-translate="galleryTitle">Algunos de nuestros eventos</h2>
+            
+            <div class="masonry-event-gallery">
+                <div class="gallery-item h-mid"><img src="img/nosotros/evento1.jpg" alt="Evento Nosotros 1"></div>
+                <div class="gallery-item h-short"><img src="img/nosotros/evento2.jpg" alt="Evento Nosotros 2"></div>
+                <div class="gallery-item h-mid"><img src="img/nosotros/evento3.jpg" alt="Evento Nosotros 3"></div>
+                <div class="gallery-item h-short"><img src="img/nosotros/evento4.jpg" alt="Evento Nosotros 4"></div>
+                <div class="gallery-item h-short"><img src="img/nosotros/evento5.jpg" alt="Evento Nosotros 5"></div>
+                <div class="gallery-item h-mid"><img src="img/nosotros/evento6.jpg" alt="Evento Nosotros 6"></div>
+                <div class="gallery-item h-short"><img src="img/nosotros/evento7.jpg" alt="Evento Nosotros 7"></div>
+                <div class="gallery-item h-mid"><img src="img/nosotros/evento8.jpg" alt="Evento Nosotros 8"></div>
+                <div class="gallery-item h-mid"><img src="img/nosotros/evento9.jpg" alt="Evento Nosotros 9"></div>
+                <div class="gallery-item h-short"><img src="img/nosotros/evento10.jpg" alt="Evento Nosotros 10"></div>
+                <div class="gallery-item h-mid"><img src="img/nosotros/evento11.jpg" alt="Evento Nosotros 11"></div>
+                <div class="gallery-item h-short"><img src="img/nosotros/evento12.jpg" alt="Evento Nosotros 12"></div>
+            </div>
+            
+            <div class="cta-final">
+                <a href="eventos.html" class="btn-cta" data-translate="ctaButton">Descubre lo que hacemos</a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p data-translate="footerText">&copy; 2025 Mosaïk Eventos. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <script>
+        const translations = {
+            es: {
+                pageTitle: 'Mosaïk Eventos | Nosotros', navEvents: 'Eventos', navAbout: 'Nosotros', navContact: 'Contacto',
+                heroTitle: 'Mosaïk Eventos', 
+                founderName: 'Carolina Pallares', founderRole: 'Fundadora',
+                bioText: 'Desde pequeña, la curiosidad por el mundo y las diferentes culturas me llevó a descubrir mi verdadera pasión: crear experiencias que conecten personas y emociones. Bilingüe y formada en Hospitalidad y Organización de Eventos en Suiza y Estados Unidos, aprendí a combinar la precisión suiza con la calidez latina. Mi camino profesional me ha llevado a trabajar en Italia, Estados Unidos, Ecuador y España, explorando distintas formas de celebrar, comunicar y emocionar. Después de más de 10 años en la industria, sigo maravillándome al ver cómo una idea se transforma en una experiencia inolvidable, diseñada con detalle, alma y propósito.',
+                value1: 'Adaptabilidad', value2: 'Transparencia', value3: 'Excelencia',
+                galleryTitle: 'Algunos de nuestros eventos',
+                ctaButton: 'Descubre lo que hacemos', footerText: '© 2025 Mosaïk Eventos. Todos los derechos reservados.'
+            },
+            en: {
+                pageTitle: 'Mosaïk Events | About Us', navEvents: 'Events', navAbout: 'About Us', navContact: 'Contact',
+                heroTitle: 'Mosaïk Events', 
+                founderName: 'Carolina Pallares', founderRole: 'Founder',
+                bioText: 'From a young age, curiosity about the world and its many cultures led me to discover my true passion: creating experiences that connect people and emotions. Bilingual and trained in Hospitality and Event Management in Switzerland and the United States, I learned to blend Swiss precision with Latin warmth. My professional journey has taken me to Italy, the United States, Ecuador, and Spain, where I’ve explored different ways to celebrate, communicate, and inspire. After more than 10 years in the industry, I’m still amazed by the magic of seeing an idea come to life — transformed into an unforgettable experience, crafted with detail, soul, and purpose.',
+                value1: 'Adaptability', value2: 'Transparency', value3: 'Excellence',
+                galleryTitle: 'Some of Our Events',
+                ctaButton: 'Discover More of Our Events', footerText: '© 2025 Mosaïk Events. All rights reserved.'
+            }
+        };
+
+        function setLanguage(lang) {
+            document.documentElement.lang = lang; 
+            const elements = document.querySelectorAll('[data-translate]');
+            elements.forEach(element => {
+                const key = element.getAttribute('data-translate');
+                if (translations[lang] && translations[lang][key]) {
+                    if (element.tagName === 'TITLE') { document.title = translations[lang][key]; } 
+                    else { 
+                        if (element.tagName !== 'SPAN') {
+                            element.textContent = translations[lang][key]; 
+                        }
+                    }
+                }
+            });
+            
+            // Re-renderiza los elementos de valores para asegurar el formato y el idioma (y el icono correcto)
+            const valuesList = document.querySelector('.values-list');
+            if (valuesList) {
+                valuesList.innerHTML = `
+                    <div data-translate="value1">
+                        <i class="fas fa-water"></i> 
+                        <span>${translations[lang].value1}</span>
+                    </div>
+                    <div data-translate="value2">
+                        <i class="fas fa-handshake"></i>
+                        <span>${translations[lang].value2}</span>
+                    </div>
+                    <div data-translate="value3">
+                        <i class="fas fa-award"></i>
+                        <span>${translations[lang].value3}</span>
+                    </div>
+                `;
+            }
+        }
+        function detectAndSetLanguage() {
+            const userLang = navigator.language.split('-')[0]; 
+            const langToUse = (userLang === 'es') ? 'es' : 'en';
+            setLanguage(langToUse);
+        }
+        document.addEventListener('DOMContentLoaded', detectAndSetLanguage);
+        
+        document.getElementById('menuToggle').addEventListener('click', function() {
+            document.getElementById('mainNav').classList.toggle('nav-open');
+        });
+    </script>
+</body>
+</html>
