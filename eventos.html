@@ -3,11 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mosaïk Eventos | Eventos</title>
+    <title data-translate="pageTitle">Mosaïk Eventos | Eventos</title>
+    
+    <meta name="description" content="Descubre el portafolio de eventos de Mosaïk, desde conferencias corporativas como Telefónica y TEDxQuito hasta eventos sociales, bodas y conciertos.">
+    <meta name="robots" content="index, follow">
     
     <link rel="icon" type="image/png" href="img/favicon.png"> 
     
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;600&family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     
@@ -24,7 +27,8 @@
         * { box-sizing: border-box; margin: 0; padding: 0; }
         html { height: 100%; }
         body {
-            font-family: 'Open Sans', sans-serif; line-height: 1.6; color: var(--gris-oscuro);
+            /* CAMBIO DE FUENTE: Open Sans -> Comfortaa */
+            font-family: 'Comfortaa', sans-serif; line-height: 1.6; color: var(--gris-oscuro);
             background-color: var(--blanco);
             display: flex; flex-direction: column; min-height: 100vh;
         }
@@ -205,7 +209,7 @@
         <div class="container header-content">
             <div class="logo">
                 <a href="index.html">
-                    <img src="img/mosaik-logo.jpg" alt="Mosaïk Eventos">
+                    <img src="img/mosaik-logo.jpg" alt="Mosaïk Eventos" loading="lazy">
                 </a>
             </div>
             
@@ -215,9 +219,9 @@
 
             <nav id="mainNav">
                 <ul>
-                    <li><a href="eventos.html" style="color: var(--azul-principal);">Eventos</a></li> 
-                    <li><a href="nosotros.html">Nosotros</a></li> 
-                    <li><a href="contacto.html">Contacto</a></li> 
+                    <li><a href="eventos.html" style="color: var(--azul-principal);" data-translate="navEvents">Eventos</a></li> 
+                    <li><a href="nosotros.html" data-translate="navAbout">Nosotros</a></li> 
+                    <li><a href="contacto.html" data-translate="navContact">Contacto</a></li> 
                 </ul>
             </nav>
         </div>
@@ -225,49 +229,49 @@
 
     <section class="main-content">
         <div class="container">
-            <h1>Nuestros Proyectos</h1>
-            <p style="margin-bottom: 50px;">Nuestra misión es transformar un sueño en una experiencia única, cuidando cada detalle desde la inspiración hasta la ejecución, para que cada evento refleje auténticamente a quien lo vive.</p>
+            <h1 data-translate="mainTitle">Nuestros Proyectos</h1>
+            <p style="margin-bottom: 50px;" data-translate="mainSubtitle">Nuestra misión es transformar un sueño en una experiencia única, cuidando cada detalle desde la inspiración hasta la ejecución, para que cada evento refleje auténticamente a quien lo vive.</p>
             
             <div class="event-gallery mosaic">
 			
 				<a href="evento-telefonica.html" class="event-card mosaic">
-                    <img src="img/eventos-home/Telefonica_Portada.jpg" alt="Telefónica">
-                    <div class="event-overlay"><span class="event-title">Telefónica</span></div>
+                    <img src="img/eventos-home/Telefonica_Portada.jpg" alt="Telefónica" loading="lazy">
+                    <div class="event-overlay"><span class="event-title" data-translate="eventTelefonica">Telefónica</span></div>
                 </a>
                 
                 <a href="evento-about.html" class="event-card mosaic">
-                    <img src="img/eventos-home/About_Portada.jpg" alt="About">
-                    <div class="event-overlay"><span class="event-title">About</span></div>
+                    <img src="img/eventos-home/About_Portada.jpg" alt="About" loading="lazy">
+                    <div class="event-overlay"><span class="event-title" data-translate="eventAbout">About</span></div>
                 </a>
                 
 				<a href="evento-tedxquito.html" class="event-card mosaic">
-                    <img src="img/eventos-home/TEDx_Portada.jpg" alt="TEDxQuito">
-                    <div class="event-overlay"><span class="event-title">TEDxQuito</span></div>
+                    <img src="img/eventos-home/TEDx_Portada.jpg" alt="TEDxQuito" loading="lazy">
+                    <div class="event-overlay"><span class="event-title" data-translate="eventTEDxQuito">TEDxQuito</span></div>
                 </a>
 				
 				<a href="evento-corporativos.html" class="event-card mosaic">
-                    <img src="img/eventos-home/Eventos_Corporativos_Portada.jpg" alt="Cena Corporativa">
-                    <div class="event-overlay"><span class="event-title">Evenos Corporativos</span></div>
+                    <img src="img/eventos-home/Eventos_Corporativos_Portada.jpg" alt="Cena Corporativa" loading="lazy">
+                    <div class="event-overlay"><span class="event-title" data-translate="eventCorporativos">Evenos Corporativos</span></div>
                 </a>
                 
 				<a href="evento-sociales.html" class="event-card mosaic">
-                    <img src="img/eventos-home/Eventos_Sociales_Portada.jpg" alt="Pasarela">
-                    <div class="event-overlay"><span class="event-title">Eventos Sociales</span></div>
+                    <img src="img/eventos-home/Eventos_Sociales_Portada.jpg" alt="Pasarela" loading="lazy">
+                    <div class="event-overlay"><span class="event-title" data-translate="eventSociales">Eventos Sociales</span></div>
                 </a>
 				
                 <a href="evento-tactik.html" class="event-card mosaic">
-                    <img src="img/eventos-home/Tactik_Portada.jpg" alt="Tactik">
-                    <div class="event-overlay"><span class="event-title">Tactik</span></div>
+                    <img src="img/eventos-home/Tactik_Portada.jpg" alt="Tactik" loading="lazy">
+                    <div class="event-overlay"><span class="event-title" data-translate="eventTactik">Tactik</span></div>
                 </a>
 				
 				<a href="evento-bodas.html" class="event-card mosaic">
-                    <img src="img/eventos-home/Bodas_Portada.jpg" alt="Bodas">
-                    <div class="event-overlay"><span class="event-title">Bodas</span></div>
+                    <img src="img/eventos-home/Bodas_Portada.jpg" alt="Bodas" loading="lazy">
+                    <div class="event-overlay"><span class="event-title" data-translate="eventBodas">Bodas</span></div>
                 </a>             
                 
 				<a href="evento-conciertos.html" class="event-card mosaic">
-                    <img src="img/eventos-home/Conciertos_Portada.jpg" alt="Conciertos">
-                    <div class="event-overlay"><span class="event-title">Conciertos</span></div>
+                    <img src="img/eventos-home/Conciertos_Portada.jpg" alt="Conciertos" loading="lazy">
+                    <div class="event-overlay"><span class="event-title" data-translate="eventConciertos">Conciertos</span></div>
                 </a>
 
             </div>
@@ -277,11 +281,67 @@
 
     <footer>
         <div class="container">
-            <p>© 2025 Mosaïk Eventos. Todos los derechos reservados.</p>
+            <p data-translate="footerCopy">© 2025 Mosaïk Eventos. Todos los derechos reservados.</p>
         </div>
     </footer>
 
     <script>
+        // =========================================================
+        // LÓGICA DE TRADUCCIÓN (i18n)
+        // =========================================================
+        const translations = {
+            es: {
+                pageTitle: 'Mosaïk Eventos | Eventos',
+                navEvents: 'Eventos', navAbout: 'Nosotros', navContact: 'Contacto',
+                mainTitle: 'Nuestros Proyectos',
+                mainSubtitle: 'Nuestra misión es transformar un sueño en una experiencia única, cuidando cada detalle desde la inspiración hasta la ejecución, para que cada evento refleje auténticamente a quien lo vive.',
+                eventTelefonica: 'Telefónica', eventAbout: 'About', eventTEDxQuito: 'TEDxQuito',
+                eventCorporativos: 'Eventos Corporativos', eventSociales: 'Eventos Sociales', eventTactik: 'Tactik',
+                eventBodas: 'Bodas', eventConciertos: 'Conciertos',
+                footerCopy: '© 2025 Mosaïk Eventos. Todos los derechos reservados.'
+            },
+            en: {
+                // PLACEHOLDERS EN INGLÉS
+                pageTitle: 'Mosaïk Eventos | Events',
+                navEvents: 'Events', navAbout: 'About Us ', navContact: 'Contact ',
+                mainTitle: 'Our Recent Creations',
+                mainSubtitle: 'Our mission is to turn dreams into unique experiences, crafting every detail —from inspiration to execution— so that each event becomes a true reflection of those who experience it.',
+                eventTelefonica: 'Telefónica ', eventAbout: 'About ', eventTEDxQuito: 'TEDxQuito ',
+                eventCorporativos: 'Corporate Events ', eventSociales: 'Social Events ', eventTactik: 'Tactik ',
+                eventBodas: 'Weddings ', eventConciertos: 'Concerts ',
+                footerCopy: '© 2025 Mosaïk Eventos. All rights reserved.'
+            }
+        };
+
+        function setLanguage(lang) {
+            // Establece el atributo lang en la etiqueta HTML para SEO y accesibilidad
+            document.documentElement.lang = lang; 
+            
+            const elements = document.querySelectorAll('[data-translate]');
+            elements.forEach(element => {
+                const key = element.getAttribute('data-translate');
+                if (translations[lang] && translations[lang][key]) {
+                    if (element.tagName === 'TITLE') { 
+                        document.title = translations[lang][key]; 
+                    } else { 
+                        element.textContent = translations[lang][key]; 
+                    }
+                }
+            });
+        }
+        
+        function detectAndSetLanguage() {
+            // Detecta el idioma principal del navegador (ej. 'es-ES' -> 'es')
+            const userLang = navigator.language.split('-')[0]; 
+            // Si el idioma es español, lo usa. Si no, usa el inglés como predeterminado para "el resto".
+            const langToUse = (userLang === 'es') ? 'es' : 'en';
+            setLanguage(langToUse);
+        }
+
+        document.addEventListener('DOMContentLoaded', detectAndSetLanguage);
+
+
+        // Lógica existente para el menú móvil
         document.getElementById('menuToggle').addEventListener('click', function() {
             document.getElementById('mainNav').classList.toggle('nav-open');
         });

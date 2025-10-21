@@ -3,11 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mosaïk Eventos | Contacto</title>
+    <title data-translate="pageTitle">Mosaïk Eventos | Contacto</title> 
+    
+    <meta name="description" content="Contacta con Mosaïk Eventos para empezar a diseñar, planificar y producir tu próximo evento corporativo, social o boda.">
+    <meta name="robots" content="index, follow">
     
     <link rel="icon" type="image/png" href="img/favicon.png"> 
     
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;600&family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     
@@ -29,23 +32,21 @@
             padding: 0;
         }
 
-        /* INICIO CORRECCIÓN STICKY FOOTER */
         html {
             height: 100%;
         }
 
         body {
-            font-family: 'Open Sans', sans-serif;
+            /* CAMBIO: COMFORTAA */
+            font-family: 'Comfortaa', sans-serif; 
             line-height: 1.6;
             color: var(--gris-oscuro);
             background-color: var(--blanco);
             
-            /* PROPIEDADES STICKY FOOTER */
             display: flex;
             flex-direction: column;
             min-height: 100vh;
         }
-        /* FIN CORRECCIÓN STICKY FOOTER */
 
         .container {
             max-width: 1200px;
@@ -64,11 +65,9 @@
             color: var(--azul-principal);
         }
 		
-		/* AJUSTE CLAVE AÑADIDO: Fuerza al enlace del logo a comportarse como un bloque */
-		/* y elimina cualquier espaciado interno que pudiera estar afectando la altura. */
 		.logo a {
 			display: block;
-			line-height: 0; /* Asegura que no añade altura extra por el texto */
+			line-height: 0; 
 			padding: 0;
 			margin: 0;
 		}
@@ -206,7 +205,8 @@
             border: 1px solid #ccc;
             border-radius: 4px;
             font-size: 1em;
-            font-family: 'Open Sans', sans-serif;
+            /* CAMBIO: COMFORTAA */
+            font-family: 'Comfortaa', sans-serif;
             transition: border-color 0.3s;
         }
 
@@ -265,7 +265,6 @@
         /* Tablet (ancho máximo 992px) */
         @media (max-width: 992px) {
             
-            /* INICIO: CÓDIGO DE NAVEGACIÓN RESPONSIVE COPIADO DE INDEX.HTML */
             .menu-toggle {
                 display: block;
             }
@@ -312,7 +311,6 @@
             .nav-open {
                 display: block;
             }
-            /* FIN: CÓDIGO DE NAVEGACIÓN RESPONSIVE COPIADO DE INDEX.HTML */
 
             .contact-section {
                 padding: 60px 0;
@@ -348,7 +346,7 @@
         <div class="container header-content">
             <div class="logo">
                 <a href="index.html">
-                    <img src="img/mosaik-logo.jpg" alt="Mosaïk Eventos">
+                    <img src="img/mosaik-logo.jpg" alt="Mosaïk Eventos" loading="lazy">
                 </a>
             </div>
             
@@ -358,9 +356,9 @@
 
             <nav id="mainNav">
                 <ul>
-                    <li><a href="eventos.html">Eventos</a></li> 
-                    <li><a href="nosotros.html">Nosotros</a></li> 
-                    <li><a href="contacto.html" style="color: var(--azul-principal);">Contacto</a></li> 
+                    <li><a href="eventos.html" data-translate="navEvents">Eventos</a></li> 
+                    <li><a href="nosotros.html" data-translate="navAbout">Nosotros</a></li> 
+                    <li><a href="contacto.html" style="color: var(--azul-principal);" data-translate="navContact">Contacto</a></li> 
                 </ul>
             </nav>
         </div>
@@ -368,47 +366,47 @@
 
     <section class="contact-section">
         <div class="container">
-            <h1>Cuéntanos acerca de tu siguiente evento</h1>
-            <p style="margin-bottom: 50px;">Comparte los detalles de tu evento y nos pondremos en contacto contigo para empezar a crear una experiencia inolvidable.</p>
+            <h1 data-translate="contactTitle">Cuéntanos acerca de tu siguiente evento</h1>
+            <p style="margin-bottom: 50px;" data-translate="contactSubtitle">Comparte los detalles de tu evento y nos pondremos en contacto contigo para empezar a crear una experiencia inolvidable.</p>
             
             <div class="contact-form-container">
                 
                 <div id="confirmationMessage">
-                    <i class="fas fa-check-circle"></i> Mensaje enviado con éxito. ¡Gracias por contactar con Mosaïk Eventos nos contactaremos contigo en breve!
+                    <i class="fas fa-check-circle"></i> <span data-translate="confirmationMessage">Mensaje enviado con éxito. ¡Gracias por contactar con Mosaïk Eventos nos contactaremos contigo en breve!</span>
                 </div>
                 
                 <div class="contact-form">
-                    <h2>Acerca de tu evento</h2>
+                    <h2 data-translate="formTitle">Acerca de tu evento</h2>
                     <form id="contactForm"> 
                         
                         <div class="form-fields">
                             
                             <div class="form-group">
-                                <label for="name">Tu Nombre Completo</label>
-                                <input type="text" id="name" name="name" required placeholder="Ej: Laura Gómez">
+                                <label for="name" data-translate="formName">Tu Nombre Completo</label>
+                                <input type="text" id="name" name="name" required>
                             </div>
                             
                             <div class="form-group">
-                                <label for="email">Tu Email</label>
-                                <input type="email" id="email" name="email" required placeholder="ejemplo@email.com">
+                                <label for="email" data-translate="formEmail">Tu Email</label>
+                                <input type="email" id="email" name="email" required>
                             </div>
                             
                             <div class="form-group">
-                                <label for="phone">Tu Teléfono</label>
-                                <input type="text" id="phone" name="phone" required placeholder="+34 6XX XXX XXX">
+                                <label for="phone" data-translate="formPhone">Tu Teléfono</label>
+                                <input type="text" id="phone" name="phone" required>
                             </div>
                             
                             <div class="form-group">
-                                <label for="event">Tipo de Evento</label>
-                                <input type="text" id="event" name="event" required placeholder="Ej: Boda, Conferencia, Corporativo, Aniversario">
+                                <label for="event" data-translate="formEvent">Tipo de Evento</label>
+                                <input type="text" id="event" name="event" required>
                             </div>
                             
                             <div class="form-group full-width">
-                                <label for="message">Describe brevemente tu evento incluyendo número de asistentes aproximado.</label>
-                                <textarea id="message" name="message" required placeholder="Cuéntanos fecha y hora aproximada."></textarea>
+                                <label for="message" data-translate="formMessage">Describe brevemente tu evento incluyendo número de asistentes aproximado.</label>
+                                <textarea id="message" name="message" required></textarea>
                             </div>
                             
-                            <button type="submit" class="btn-cta">Enviar Mensaje</button>
+                            <button type="submit" class="btn-cta" data-translate="formSubmit">Enviar Mensaje</button>
                             
                         </div>
                         
@@ -421,11 +419,73 @@
 
     <footer>
         <div class="container">
-            <p>© 2025 Mosaïk Eventos. Todos los derechos reservados.</p>
+            <p data-translate="footerCopy">© 2025 Mosaïk Eventos. Todos los derechos reservados.</p>
         </div>
     </footer>
 
     <script>
+        // =========================================================
+        // LÓGICA DE TRADUCCIÓN (i18n)
+        // =========================================================
+        const translations = {
+            es: {
+                pageTitle: 'Mosaïk Eventos | Contacto',
+                navEvents: 'Eventos', navAbout: 'Nosotros', navContact: 'Contacto',
+                contactTitle: 'Cuéntanos acerca de tu siguiente evento',
+                contactSubtitle: 'Comparte los detalles de tu evento y nos pondremos en contacto contigo para empezar a crear una experiencia inolvidable.',
+                formTitle: 'Acerca de tu evento',
+                formName: 'Tu Nombre Completo', formEmail: 'Tu Email', formPhone: 'Tu Teléfono', formEvent: 'Tipo de Evento',
+                formMessage: 'Describe brevemente tu evento incluyendo número de asistentes aproximado.',
+                formSubmit: 'Enviar Mensaje',
+                confirmationMessage: 'Mensaje enviado con éxito. ¡Gracias por contactar con Mosaïk Eventos, nos contactaremos contigo en breve!',
+                footerCopy: '© 2025 Mosaïk Eventos. Todos los derechos reservados.'
+            },
+            en: {
+                // PLACEHOLDERS EN INGLÉS
+                pageTitle: 'Mosaïk Eventos | Contact',
+                navEvents: 'Events', navAbout: 'About Us', navContact: 'Contact',
+                contactTitle: 'Let’s talk about your next event',
+                contactSubtitle: 'Tell us about your event, and we’ll reach out to start designing an extraordinary experience together.',
+                formTitle: 'About Your Event',
+                formName: 'Name and Lastname', formEmail: 'Email', formPhone: 'Phone Number', formEvent: 'Event Type',
+                formMessage: 'Briefly describe your event, including the approximate number of guests.',
+                formSubmit: 'Send Your Message',
+                confirmationMessage: 'Your message has been sent successfully. Thank you for reaching out to Mosaïk Events — our team will be in touch shortly!',
+                footerCopy: '© 2025 Mosaïk Eventos. All rights reserved.'
+            }
+        };
+
+        function setLanguage(lang) {
+            // Establece el atributo lang en la etiqueta HTML para SEO y accesibilidad
+            document.documentElement.lang = lang; 
+            
+            const elements = document.querySelectorAll('[data-translate]');
+            elements.forEach(element => {
+                const key = element.getAttribute('data-translate');
+                if (translations[lang] && translations[lang][key]) {
+                    if (element.tagName === 'TITLE') { 
+                        document.title = translations[lang][key]; 
+                    } else { 
+                        element.textContent = translations[lang][key]; 
+                    }
+                }
+            });
+        }
+        
+        function detectAndSetLanguage() {
+            // Detecta el idioma principal del navegador (ej. 'es-ES' -> 'es')
+            const userLang = navigator.language.split('-')[0]; 
+            // Si el idioma es español, lo usa. Si no, usa el inglés como predeterminado para "el resto".
+            const langToUse = (userLang === 'es') ? 'es' : 'en';
+            setLanguage(langToUse);
+        }
+
+        document.addEventListener('DOMContentLoaded', detectAndSetLanguage);
+
+        // =========================================================
+        // TOGGLE Y FUNCIONALIDAD DE FORMULARIO
+        // =========================================================
+
         // TOGGLE DEL MENÚ MÓVIL
         document.getElementById('menuToggle').addEventListener('click', function() {
             document.getElementById('mainNav').classList.toggle('nav-open');
@@ -452,7 +512,15 @@
             const formData = new FormData(form);
             let body = '';
             for (const [key, value] of formData.entries()) {
-                body += `${key}: ${value}\n`;
+                // Traduce la clave para el cuerpo del correo si el idioma actual es 'en'
+                const currentLang = document.documentElement.lang;
+                const keyTranslation = currentLang === 'en' && translations['en'][`form${key.charAt(0).toUpperCase() + key.slice(1)}`] 
+                                    ? translations['en'][`form${key.charAt(0).toUpperCase() + key.slice(1)}`] 
+                                    : (currentLang === 'es' && translations['es'][`form${key.charAt(0).toUpperCase() + key.slice(1)}`] 
+                                       ? translations['es'][`form${key.charAt(0).toUpperCase() + key.slice(1)}`] 
+                                       : key.charAt(0).toUpperCase() + key.slice(1)); // Intenta usar la traducción, si no, usa la clave original
+
+                body += `${keyTranslation}: ${value}\n`;
             }
             
             // 4. Abrir el cliente de correo con los datos

@@ -5,8 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title data-translate="pageTitle">Mosaïk Eventos | Nosotros</title>
     
+    <meta name="description" content="Mosaïk Eventos es una empresa dedicada a la planificación y producción de eventos con más de 10 años de experiencia internacional, combinando precisión y creatividad para crear experiencias inolvidables.">
+    <meta name="robots" content="index, follow">
+    
     <link rel="icon" type="image/png" href="img/favicon.png"> 
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;600&family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     
     <style>
@@ -22,7 +27,8 @@
 
         /* Estilos Globales (Reutilizados) */
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family: 'Open Sans', sans-serif; line-height: 1.6; color: var(--gris-oscuro); background-color: var(--blanco); }
+        /* CAMBIO DE FUENTE: Open Sans -> Comfortaa */
+        body { font-family: 'Comfortaa', sans-serif; line-height: 1.6; color: var(--gris-oscuro); background-color: var(--blanco); }
         .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
         h1, h2, h3 { font-family: 'Montserrat', sans-serif; font-weight: 700; margin-bottom: 20px; }
         a { text-decoration: none; color: var(--azul-principal); }
@@ -52,26 +58,27 @@
             align-items: center;
             justify-content: center;
             position: relative; 
-            overflow: hidden; /* Necesario para contener el pseudo-elemento blur */
+            overflow: hidden; 
         }
         
         /* Nuevo pseudo-elemento ::after para la imagen de fondo con Blur */
         .hero-internal::after {
             content: '';
             position: absolute;
-            top: -10px; /* Valor negativo para asegurar que el desenfoque no muestre bordes */
+            top: -10px; 
             left: -10px;
             right: -10px;
             bottom: -10px;
             
             /* Imagen por defecto (Desktop) */
+            /* La imagen de fondo no lleva 'loading="lazy"' ya que se carga desde CSS */
             background-image: url('img/nosotros/hero-desktop.jpg'); 
             background-size: cover; 
             background-position: center center; 
             background-repeat: no-repeat; 
             
-            filter: blur(3px); /* BLUR SOLICITADO */
-            z-index: 0; /* Fondo */
+            filter: blur(3px); 
+            z-index: 0; 
         }
         
         /* El pseudo-elemento ::before se mantiene para el overlay oscuro */
@@ -80,9 +87,9 @@
             position: absolute;
             top: 0; left: 0; right: 0; bottom: 0;
             background: rgba(0,0,0,0.3);
-            z-index: 1; /* Encima del blur, debajo del texto */
+            z-index: 1; 
         }
-        .hero-internal .container { z-index: 2; } /* El texto se mantiene nítido */
+        .hero-internal .container { z-index: 2; } 
         .hero-internal h1 { font-size: 3em; margin-bottom: 0; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.9); }
         
         .wood-separator { background-image: var(--fondo-madera); background-size: cover; background-repeat: repeat; background-position: center center; height: 35px; }
@@ -106,7 +113,6 @@
             object-fit: cover;
             border-radius: 8px;
             box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
-            /* Borde eliminado */
         }
         .founder-text { flex-grow: 1; }
         .founder-text h2 { color: var(--azul-principal); margin-top: 0; margin-bottom: 5px; }
@@ -131,28 +137,25 @@
             gap: 20px; 
             flex-wrap: wrap; 
         }
-        /* Contenedor del principio: centrado vertical/horizontal y ancho completo */
         .values-list div {
             display: flex;
-            flex-direction: column; /* Icono encima del texto */
+            flex-direction: column; 
             align-items: center; 
             max-width: 30%; 
             padding: 0 20px;
-            border-right: 1px solid rgba(255, 255, 255, 0.3); /* Separador entre elementos */
+            border-right: 1px solid rgba(255, 255, 255, 0.3); 
             flex-grow: 1;
         }
         .values-list div:last-child {
             border-right: none;
         }
         
-        /* Icono (Sin círculo/elipse) - TAMAÑO ACTUALIZADO A 2.5em */
         .values-list i {
             font-size: 2.5em; 
             color: var(--blanco); 
             margin-bottom: 10px; 
         }
         
-        /* Texto del Principio - TAMAÑO ACTUALIZADO A 1em */
         .values-list span {
             font-family: 'Montserrat', sans-serif;
             font-weight: 700;
@@ -203,9 +206,9 @@
         /* --- MEDIA QUERIES --- */
         
         @media (max-width: 992px) {
-            /* 1. NAVEGACIÓN RESPONSIVE (TABLET) */
+            
             .header-content { align-items: flex-start; } 
-            .menu-toggle { display: block; order: 2; margin-left: 20px; } /* Mostrar toggle */
+            .menu-toggle { display: block; order: 2; margin-left: 20px; } 
             
             nav { 
                 position: absolute; 
@@ -240,12 +243,10 @@
                 border-bottom: none; 
             }
             
-            /* Imagen para Tablet */
             .hero-internal::after { 
                 background-image: url('img/nosotros/hero-tablet.jpg'); 
             }
             
-            /* AJUSTE FUNDADORA: Foto a la izquierda, texto a la derecha en Tablet */
             .founder-content { 
                 flex-direction: row; 
                 align-items: flex-start; 
@@ -275,7 +276,6 @@
             
             .masonry-event-gallery { grid-template-columns: repeat(2, 1fr); }
 
-            /* Valores Responsive (Tablet): 2 columnas */
             .values-list div {
                 max-width: 45%; 
                 margin-bottom: 0; 
@@ -285,26 +285,21 @@
         
         @media (max-width: 767px) {
             .hero-internal { height: 250px; }
-            /* Imagen para Mobile */
             .hero-internal::after { 
                 background-image: url('img/nosotros/hero-mobile.jpg'); 
             }
             
-            /* Centrado de textos (Fundadora y Hero) */
             .hero-internal h1 { text-align: center; } 
             
-            /* El texto se centra en móvil */
             .founder-text h2, 
             .founder-text p.role, 
             .bio-text { 
                 text-align: center; 
             }
             .bio-text p {
-                /* Sobrescribe text-align: justify/left del estilo base/tablet */
                 text-align: center; 
             }
             
-            /* AJUSTES PARA MOBILE (Vertical y centrado) */
             .founder-content { 
                 flex-direction: column; 
                 align-items: center;
@@ -319,14 +314,13 @@
                 width: 100%;
             }
             
-            /* CORRECCIÓN: VALORES APILADOS EN MOBILE */
             .values-list {
-                flex-direction: column; /* FUERZA EL APILAMIENTO DE LOS ELEMENTOS HIJOS */
-                align-items: center; /* Centra los hijos en el contenedor vertical */
+                flex-direction: column; 
+                align-items: center; 
             }
             .values-list div {
-                max-width: 100%; /* Ocupa el ancho completo */
-                padding: 0 10px; /* Reducir padding en mobile */
+                max-width: 100%; 
+                padding: 0 10px; 
                 margin-bottom: 30px; 
                 border-right: none; 
             }
@@ -343,7 +337,9 @@
     <header>
         <div class="container header-content">
             <div class="logo">
-                <a href="index.html"><img src="img/mosaik-logo.jpg" alt="Mosaïk Eventos"></a>
+                <a href="index.html">
+                    <img src="img/mosaik-logo.jpg" alt="Mosaïk Eventos" loading="lazy">
+                </a>
             </div>
             <div class="menu-toggle" id="menuToggle"><i class="fas fa-bars"></i></div>
             <nav id="mainNav">
@@ -368,7 +364,7 @@
         <div class="container">
             <div class="founder-content">
                 <div class="founder-portrait">
-                    <img src="img/nosotros/carolina_pallares.jpg" alt="Carolina Pallares">
+                    <img src="img/nosotros/carolina_pallares.jpg" alt="Carolina Pallares" loading="lazy">
                 </div>
                 <div class="founder-text">
                     <h2 data-translate="founderName">Carolina Pallares</h2>
@@ -408,18 +404,18 @@
             <h2 data-translate="galleryTitle">Algunos de nuestros eventos</h2>
             
             <div class="masonry-event-gallery">
-                <div class="gallery-item h-mid"><img src="img/nosotros/evento1.jpg" alt="Evento Nosotros 1"></div>
-                <div class="gallery-item h-short"><img src="img/nosotros/evento2.jpg" alt="Evento Nosotros 2"></div>
-                <div class="gallery-item h-mid"><img src="img/nosotros/evento3.jpg" alt="Evento Nosotros 3"></div>
-                <div class="gallery-item h-short"><img src="img/nosotros/evento4.jpg" alt="Evento Nosotros 4"></div>
-                <div class="gallery-item h-short"><img src="img/nosotros/evento5.jpg" alt="Evento Nosotros 5"></div>
-                <div class="gallery-item h-mid"><img src="img/nosotros/evento6.jpg" alt="Evento Nosotros 6"></div>
-                <div class="gallery-item h-short"><img src="img/nosotros/evento7.jpg" alt="Evento Nosotros 7"></div>
-                <div class="gallery-item h-mid"><img src="img/nosotros/evento8.jpg" alt="Evento Nosotros 8"></div>
-                <div class="gallery-item h-mid"><img src="img/nosotros/evento9.jpg" alt="Evento Nosotros 9"></div>
-                <div class="gallery-item h-short"><img src="img/nosotros/evento10.jpg" alt="Evento Nosotros 10"></div>
-                <div class="gallery-item h-mid"><img src="img/nosotros/evento11.jpg" alt="Evento Nosotros 11"></div>
-                <div class="gallery-item h-short"><img src="img/nosotros/evento12.jpg" alt="Evento Nosotros 12"></div>
+                <div class="gallery-item h-mid"><img src="img/nosotros/evento1.jpg" alt="Evento Nosotros 1" loading="lazy"></div>
+                <div class="gallery-item h-short"><img src="img/nosotros/evento2.jpg" alt="Evento Nosotros 2" loading="lazy"></div>
+                <div class="gallery-item h-mid"><img src="img/nosotros/evento3.jpg" alt="Evento Nosotros 3" loading="lazy"></div>
+                <div class="gallery-item h-short"><img src="img/nosotros/evento4.jpg" alt="Evento Nosotros 4" loading="lazy"></div>
+                <div class="gallery-item h-short"><img src="img/nosotros/evento5.jpg" alt="Evento Nosotros 5" loading="lazy"></div>
+                <div class="gallery-item h-mid"><img src="img/nosotros/evento6.jpg" alt="Evento Nosotros 6" loading="lazy"></div>
+                <div class="gallery-item h-short"><img src="img/nosotros/evento7.jpg" alt="Evento Nosotros 7" loading="lazy"></div>
+                <div class="gallery-item h-mid"><img src="img/nosotros/evento8.jpg" alt="Evento Nosotros 8" loading="lazy"></div>
+                <div class="gallery-item h-mid"><img src="img/nosotros/evento9.jpg" alt="Evento Nosotros 9" loading="lazy"></div>
+                <div class="gallery-item h-short"><img src="img/nosotros/evento10.jpg" alt="Evento Nosotros 10" loading="lazy"></div>
+                <div class="gallery-item h-mid"><img src="img/nosotros/evento11.jpg" alt="Evento Nosotros 11" loading="lazy"></div>
+                <div class="gallery-item h-short"><img src="img/nosotros/evento12.jpg" alt="Evento Nosotros 12" loading="lazy"></div>
             </div>
             
             <div class="cta-final">
@@ -446,13 +442,14 @@
                 ctaButton: 'Descubre lo que hacemos', footerText: '© 2025 Mosaïk Eventos. Todos los derechos reservados.'
             },
             en: {
-                pageTitle: 'Mosaïk Events | About Us', navEvents: 'Events', navAbout: 'About Us', navContact: 'Contact',
-                heroTitle: 'Mosaïk Events', 
+                // PLACEHOLDERS EN INGLÉS
+                pageTitle: 'Mosaïk Eventos | About Us', navEvents: 'Events', navAbout: 'About Us', navContact: 'Contact',
+                heroTitle: 'Mosaïk Eventos', 
                 founderName: 'Carolina Pallares', founderRole: 'Founder',
                 bioText: 'From a young age, curiosity about the world and its many cultures led me to discover my true passion: creating experiences that connect people and emotions. Bilingual and trained in Hospitality and Event Management in Switzerland and the United States, I learned to blend Swiss precision with Latin warmth. My professional journey has taken me to Italy, the United States, Ecuador, and Spain, where I’ve explored different ways to celebrate, communicate, and inspire. After more than 10 years in the industry, I’m still amazed by the magic of seeing an idea come to life — transformed into an unforgettable experience, crafted with detail, soul, and purpose.',
-                value1: 'Adaptability', value2: 'Transparency', value3: 'Excellence',
+                value1: 'Adaptability', value2: 'Transparency', value3: 'Excelence',
                 galleryTitle: 'Some of Our Events',
-                ctaButton: 'Discover More of Our Events', footerText: '© 2025 Mosaïk Events. All rights reserved.'
+                ctaButton: 'Discover More of Our Events', footerText: '© 2025 Mosaïk Eventos. All rights reserved. (EN)'
             }
         };
 
@@ -464,7 +461,8 @@
                 if (translations[lang] && translations[lang][key]) {
                     if (element.tagName === 'TITLE') { document.title = translations[lang][key]; } 
                     else { 
-                        if (element.tagName !== 'SPAN') {
+                        // El texto del <span> de los valores se maneja en el re-renderizado
+                        if (element.tagName !== 'SPAN') { 
                             element.textContent = translations[lang][key]; 
                         }
                     }
@@ -474,6 +472,7 @@
             // Re-renderiza los elementos de valores para asegurar el formato y el idioma (y el icono correcto)
             const valuesList = document.querySelector('.values-list');
             if (valuesList) {
+                // Se reescribe el HTML de la lista de valores para actualizar el <span> con la traducción
                 valuesList.innerHTML = `
                     <div data-translate="value1">
                         <i class="fas fa-water"></i> 
@@ -491,7 +490,9 @@
             }
         }
         function detectAndSetLanguage() {
+            // Detecta el idioma principal del navegador (ej. 'es-ES' -> 'es')
             const userLang = navigator.language.split('-')[0]; 
+            // Si el idioma es español ('es'), lo usa. Si no, usa el inglés ('en') como predeterminado para "el resto".
             const langToUse = (userLang === 'es') ? 'es' : 'en';
             setLanguage(langToUse);
         }

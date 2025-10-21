@@ -3,11 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mosaïk Eventos</title>
+    <title data-translate="pageTitle">Mosaïk Eventos</title> 
+    
+    <meta name="description" content="Mosaïk Eventos - Expertos en diseño, creación y producción de eventos corporativos, bodas y celebraciones sociales exclusivas. Transforma tus ideas en momentos memorables.">
+    <meta name="robots" content="index, follow">
     
     <link rel="icon" type="image/png" href="img/favicon.png"> 
     
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;600&family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     
@@ -33,7 +36,7 @@
         }
 
         body {
-            font-family: 'Open Sans', sans-serif;
+            font-family: 'Comfortaa', sans-serif; /* CAMBIO: Comfortaa */
             line-height: 1.6;
             color: var(--gris-oscuro);
             background-color: var(--blanco);
@@ -56,11 +59,9 @@
             color: var(--azul-principal);
         }
 		
-		/* AJUSTE CLAVE AÑADIDO: Fuerza al enlace del logo a comportarse como un bloque */
-		/* y elimina cualquier espaciado interno que pudiera estar afectando la altura. */
 		.logo a {
 			display: block;
-			line-height: 0; /* Asegura que no añade altura extra por el texto */
+			line-height: 0; 
 			padding: 0;
 			margin: 0;
 		}
@@ -271,8 +272,6 @@
             display: block; 
         }
         
-        /* SE ELIMINARON LOS ESTILOS DE .carousel-button */
-
         .carousel-dots {
             text-align: center;
             margin-top: 20px;
@@ -319,6 +318,11 @@
         /* 6. Sobre Nosotros */
 		.gallery .btn-cta {
 			margin-top: 30px;
+			background-color: var(--gris-oscuro); 
+		}
+		
+		.gallery .btn-cta:hover {
+			background-color: var(--gris-oscuro-hover); 
 		}
 		
 		/* 7. Sobre Nosotros */
@@ -373,7 +377,6 @@
             color: var(--blanco);
         }
         
-        /* FIX DESKTOP: Asegura que el contenedor respete max-width (con margin: 0 auto) y que el botón esté a la izquierda */
         .cta-final .container {
             margin: 0 auto; /* Restaura el centrado global y el max-width: 1200px */
             text-align: left; /* Asegura que el botón dentro del contenedor se alinee a la izquierda */
@@ -594,8 +597,7 @@
         <div class="container header-content">
             <div class="logo">
                 <a href="index.html">
-                    <img src="img/mosaik-logo.jpg" alt="Mosaïk Eventos">
-                </a>
+                    <img src="img/mosaik-logo.jpg" alt="Mosaïk Eventos" loading="lazy"> </a>
             </div>
             
             <div class="menu-toggle" id="menuToggle">
@@ -604,9 +606,9 @@
 
             <nav id="mainNav">
                 <ul>
-                    <li><a href="eventos.html">Eventos</a></li> 
-                    <li><a href="nosotros.html">Nosotros</a></li> 
-                    <li><a href="contacto.html">Contacto</a></li> 
+                    <li><a href="eventos.html" data-translate="navEvents">Eventos</a></li> 
+                    <li><a href="nosotros.html" data-translate="navAbout">Nosotros</a></li> 
+                    <li><a href="contacto.html" data-translate="navContact">Contacto</a></li> 
                 </ul>
             </nav>
         </div>
@@ -614,8 +616,8 @@
 
     <section class="hero">
         <div class="container">
-            <h1>Creando momentos excepcionales</h1>
-            <p>Tu evento, nuestra pasión. Diseño y excelencia.</p>
+            <h1 data-translate="heroTitle">Creando momentos excepcionales</h1>
+            <p data-translate="heroSubtitle">Tu evento, nuestra pasión. Diseño y excelencia.</p>
         </div>
     </section>
 
@@ -626,22 +628,22 @@
 
     <section class="services">
         <div class="container">
-            <h2>Nuestros Servicios</h2>
+            <h2 data-translate="servicesTitle">Nuestros Servicios</h2>
             <div class="service-grid">
                 <div class="service-item">
                     <i class="fas fa-heart"></i>
-                    <h3>Bodas</h3>
-                    <p>Diseños exclusivos para el día más importante de tu vida.</p>
+                    <h3 data-translate="serviceWeddingsTitle">Bodas</h3>
+                    <p data-translate="serviceWeddingsText">Diseños exclusivos para el día más importante de tu vida.</p>
                 </div>
                 <div class="service-item">
                     <i class="fas fa-briefcase"></i>
-                    <h3>Eventos Corporativos</h3>
-                    <p>Experiencias corporativas exclusivas diseñadas para inspirar.</p>
+                    <h3 data-translate="serviceCorporateTitle">Eventos Corporativos</h3>
+                    <p data-translate="serviceCorporateText">Experiencias corporativas exclusivas diseñadas para inspirar.</p>
                 </div>
                 <div class="service-item">
                     <i class="fas fa-glass-cheers"></i>
-                    <h3>Eventos Sociales Exclusivos</h3>
-                    <p>Aniversarios, fiestas y celebraciones privadas diseñadas para disfrutar y recordar.</p>
+                    <h3 data-translate="serviceSocialTitle">Eventos Sociales Exclusivos</h3>
+                    <p data-translate="serviceSocialText">Aniversarios, fiestas y celebraciones privadas diseñadas para disfrutar y recordar.</p>
                 </div>
             </div>
         </div>
@@ -649,12 +651,12 @@
     
     <section class="clients">
         <div class="container">
-            <h3>Algunos de Nuestros Clientes</h3>
+            <h3 data-translate="clientsTitle">Algunos de Nuestros Clientes</h3>
             <div class="client-logos">
-                <img src="img/logos/logo-tedX.png" alt="Logo TedX">
-                <img src="img/logos/logo-telefonica.png" alt="Logo Telefónica">
-                <img src="img/logos/logo-kfc.png" alt="Logo KFC">
-                <img src="img/logos/logo-tactik.png" alt="Logo Tactik">
+                <img src="img/logos/logo-tedX.png" alt="Logo TedX" loading="lazy">
+                <img src="img/logos/logo-telefonica.png" alt="Logo Telefónica" loading="lazy">
+                <img src="img/logos/logo-kfc.png" alt="Logo KFC" loading="lazy">
+                <img src="img/logos/logo-tactik.png" alt="Logo Tactik" loading="lazy">
             </div>
         </div>
     </section>
@@ -663,7 +665,7 @@
     <section class="gallery">
         <div class="gallery-title-wood">
             <div class="container">
-                <h2>Momentos Mosaïk Eventos</h2>
+                <h2 data-translate="galleryTitle">Momentos Mosaïk Eventos</h2>
             </div>
         </div>
         
@@ -672,15 +674,15 @@
             <div class="carousel-container" id="carouselContainer">
                 <div class="carousel-slides" id="carouselSlides">
                     
-                    <div class="carousel-item"><img src="img/home/evento-mosaik-01.jpg" alt="Detalle de evento Mosaïk 1"></div>
-                    <div class="carousel-item"><img src="img/home/evento-mosaik-02.jpg" alt="Detalle de evento Mosaïk 2"></div>
-                    <div class="carousel-item"><img src="img/home/evento-mosaik-03.jpg" alt="Detalle de evento Mosaïk 3"></div>
-                    <div class="carousel-item"><img src="img/home/evento-mosaik-04.jpg" alt="Detalle de evento Mosaïk 4"></div>
-                    <div class="carousel-item"><img src="img/home/evento-mosaik-05.jpg" alt="Detalle de evento Mosaïk 5"></div>
-					<div class="carousel-item"><img src="img/home/evento-mosaik-06.jpg" alt="Detalle de evento Mosaïk 6"></div>
-					<div class="carousel-item"><img src="img/home/evento-mosaik-07.jpg" alt="Detalle de evento Mosaïk 7"></div>
-					<div class="carousel-item"><img src="img/home/evento-mosaik-08.jpg" alt="Detalle de evento Mosaïk 8"></div>
-					<div class="carousel-item"><img src="img/home/evento-mosaik-09.jpg" alt="Detalle de evento Mosaïk 9"></div>
+                    <div class="carousel-item"><img src="img/home/evento-mosaik-01.jpg" alt="Detalle de evento Mosaïk 1" loading="lazy"></div>
+                    <div class="carousel-item"><img src="img/home/evento-mosaik-02.jpg" alt="Detalle de evento Mosaïk 2" loading="lazy"></div>
+                    <div class="carousel-item"><img src="img/home/evento-mosaik-03.jpg" alt="Detalle de evento Mosaïk 3" loading="lazy"></div>
+                    <div class="carousel-item"><img src="img/home/evento-mosaik-04.jpg" alt="Detalle de evento Mosaïk 4" loading="lazy"></div>
+                    <div class="carousel-item"><img src="img/home/evento-mosaik-05.jpg" alt="Detalle de evento Mosaïk 5" loading="lazy"></div>
+					<div class="carousel-item"><img src="img/home/evento-mosaik-06.jpg" alt="Detalle de evento Mosaïk 6" loading="lazy"></div>
+					<div class="carousel-item"><img src="img/home/evento-mosaik-07.jpg" alt="Detalle de evento Mosaïk 7" loading="lazy"></div>
+					<div class="carousel-item"><img src="img/home/evento-mosaik-08.jpg" alt="Detalle de evento Mosaïk 8" loading="lazy"></div>
+					<div class="carousel-item"><img src="img/home/evento-mosaik-09.jpg" alt="Detalle de evento Mosaïk 9" loading="lazy"></div>
                     
                 </div>
                 
@@ -690,7 +692,7 @@
             </div>
         </div>
 		
-		<a href="eventos.html" class="btn-cta">Descubre lo que hacemos</a>
+		<a href="eventos.html" class="btn-cta" data-translate="galleryCTA">Descubre lo que hacemos</a>
 
     </section>
 
@@ -698,12 +700,12 @@
         <div class="container">
             <div class="about-content"> 
                 <div class="about-text">
-                    <h2>Acerca de Mosaïk Eventos</h2>
-                    <p>Mosaïk Eventos se dedica a la creación, diseño y producción de experiencias únicas, adaptadas a las necesidades y esencia de cada cliente. Combinamos creatividad, planificación estratégica y precisión en la ejecución para transformar ideas en eventos memorables. Nuestro equipo aborda cada proyecto con una visión integral, cuidando cada detalle —desde la conceptualización hasta la implementación final— para garantizar resultados impecables. Ya sea en el ámbito corporativo, social o institucional, buscamos generar conexiones auténticas, emociones duraderas y momentos que trascienden.</p>
-                    <a href="nosotros.html" class="btn-cta">Conoce a Nuestro Equipo</a>
+                    <h2 data-translate="aboutTitle">Acerca de Mosaïk Eventos</h2>
+                    <p data-translate="aboutText">Mosaïk Eventos se dedica a la creación, diseño y producción de experiencias únicas, adaptadas a las necesidades y esencia de cada cliente. Combinamos creatividad, planificación estratégica y precisión en la ejecución para transformar ideas en eventos memorables. Nuestro equipo aborda cada proyecto con una visión integral, cuidando cada detalle —desde la conceptualización hasta la implementación final— para garantizar resultados impecables. Ya sea en el ámbito corporativo, social o institucional, buscamos generar conexiones auténticas, emociones duraderas y momentos que trascienden.</p>
+                    <a href="nosotros.html" class="btn-cta" data-translate="aboutCTA">Conoce a Nuestro Equipo</a>
                 </div>
                 <div class="about-image">
-                    <img src="img/home/sobre-nosotros.jpg" alt="Foto del Equipo Mosaïk"> 
+                    <img src="img/home/sobre-nosotros.jpg" alt="Foto del Equipo Mosaïk" loading="lazy"> 
                 </div>
             </div>
         </div>
@@ -716,18 +718,85 @@
 
     <section class="cta-final">
         <div class="container">
-            <a href="contacto.html" class="btn-cta">Contacta con nosotros</a>
+            <a href="contacto.html" class="btn-cta" data-translate="finalCTA">Contacta con nosotros</a>
         </div>
     </section>
     
     <footer>
         <div class="container">
-            <p>&copy; 2025 Mosaïk Eventos. Todos los derechos reservados.</p>
+            <p data-translate="footerCopy">&copy; 2025 Mosaïk Eventos. Todos los derechos reservados.</p>
         </div>
     </footer>
 
     <script>
-        // Registro del Service Worker para cachear archivos
+        // =========================================================
+        // LÓGICA DE TRADUCCIÓN (i18n)
+        // =========================================================
+        const translations = {
+            es: {
+                pageTitle: 'Mosaïk Eventos',
+                navEvents: 'Eventos', navAbout: 'Nosotros', navContact: 'Contacto',
+                heroTitle: 'Creando momentos excepcionales', heroSubtitle: 'Tu evento, nuestra pasión. Diseño y excelencia.',
+                servicesTitle: 'Nuestros Servicios',
+                serviceWeddingsTitle: 'Bodas', serviceWeddingsText: 'Diseños exclusivos para el día más importante de tu vida.',
+                serviceCorporateTitle: 'Eventos Corporativos', serviceCorporateText: 'Experiencias corporativas exclusivas diseñadas para inspirar.',
+                serviceSocialTitle: 'Eventos Sociales Exclusivos', serviceSocialText: 'Aniversarios, fiestas y celebraciones privadas diseñadas para disfrutar y recordar.',
+                clientsTitle: 'Algunos de Nuestros Clientes',
+                galleryTitle: 'Momentos Mosaïk Eventos', galleryCTA: 'Descubre lo que hacemos',
+                aboutTitle: 'Acerca de Mosaïk Eventos', aboutText: 'Mosaïk Eventos se dedica a la creación, diseño y producción de experiencias únicas, adaptadas a las necesidades y esencia de cada cliente. Combinamos creatividad, planificación estratégica y precisión en la ejecución para transformar ideas en eventos memorables. Nuestro equipo aborda cada proyecto con una visión integral, cuidando cada detalle —desde la conceptualización hasta la implementación final— para garantizar resultados impecables. Ya sea en el ámbito corporativo, social o institucional, buscamos generar conexiones auténticas, emociones duraderas y momentos que trascienden.',
+                aboutCTA: 'Conoce a Nuestro Equipo',
+                finalCTA: 'Contacta con nosotros',
+                footerCopy: '© 2025 Mosaïk Eventos. Todos los derechos reservados.'
+            },
+            en: {
+                // PLACEHOLDERS EN INGLÉS - DEBEN SER TRADUCIDOS REALMENTE
+                pageTitle: 'Mosaïk Eventos',
+                navEvents: 'Events', navAbout: 'About Us', navContact: 'Contact',
+                heroTitle: 'Creating memorable experiences', heroSubtitle: 'Your event, our passion. From design to execution.',
+                servicesTitle: 'Our Services',
+                serviceWeddingsTitle: 'Weddings', serviceWeddingsText: 'Custom designs for the most important day of your life.',
+                serviceCorporateTitle: 'Corporate events', serviceCorporateText: 'Tailored corporate events designed to inspire.',
+                serviceSocialTitle: 'Exclusive Celebrations', serviceSocialText: 'Anniversaries, parties, and private celebrations crafted to inspire lasting memories.',
+                clientsTitle: 'Our Clients',
+                galleryTitle: 'Moments Mosaïk Eventos ', galleryCTA: 'Discover our work',
+                aboutTitle: 'About Mosaïk Eventos', aboutText: 'Mosaïk Events specializes in the creation, design, and production of unique experiences tailored to each client’s essence and needs. We combine creativity, strategic planning, and flawless execution to transform ideas into memorable events. Our team approaches every project with a holistic vision, paying attention to every detail — from concept development to final implementation — to ensure exceptional results. Whether in the corporate, social, or institutional sphere, we aim to create genuine connections, lasting emotions, and moments that truly resonate.',
+                aboutCTA: 'Get to Know Our Team',
+                finalCTA: 'Contact us',
+                footerCopy: '© 2025 Mosaïk Eventos. All rights reserved.'
+            }
+        };
+
+        function setLanguage(lang) {
+            // Establece el atributo lang en la etiqueta HTML para SEO y accesibilidad
+            document.documentElement.lang = lang; 
+            
+            const elements = document.querySelectorAll('[data-translate]');
+            elements.forEach(element => {
+                const key = element.getAttribute('data-translate');
+                if (translations[lang] && translations[lang][key]) {
+                    if (element.tagName === 'TITLE') { 
+                        document.title = translations[lang][key]; 
+                    } else { 
+                        element.textContent = translations[lang][key]; 
+                    }
+                }
+            });
+        }
+        
+        function detectAndSetLanguage() {
+            // Detecta el idioma principal del navegador (ej. 'es-ES' -> 'es')
+            const userLang = navigator.language.split('-')[0]; 
+            // Si el idioma es español, lo usa. Si no, usa el inglés como predeterminado para "el resto".
+            const langToUse = (userLang === 'es') ? 'es' : 'en';
+            setLanguage(langToUse);
+        }
+
+        // Ejecutar la detección y traducción al cargar el contenido
+        document.addEventListener('DOMContentLoaded', detectAndSetLanguage);
+
+        // =========================================================
+        // SERVICE WORKER (PWA) Y CARRUSEL
+        // =========================================================
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
                 navigator.serviceWorker.register('/sw.js')
@@ -740,7 +809,6 @@
             });
         }
 
-
         // TOGGLE DEL MENÚ MÓVIL
         document.getElementById('menuToggle').addEventListener('click', function() {
             document.getElementById('mainNav').classList.toggle('nav-open');
@@ -750,7 +818,6 @@
         const carouselContainer = document.getElementById('carouselContainer');
         const carouselSlides = document.getElementById('carouselSlides');
         const carouselItems = document.querySelectorAll('.carousel-item');
-        // SE ELIMINARON prevButton y nextButton
         const carouselDotsContainer = document.getElementById('carouselDots');
         
         let currentIndex = 0;
@@ -826,11 +893,9 @@
             }
         });
 
-        // SE ELIMINARON LOS EVENT LISTENERS DE prevButton y nextButton
-        
         window.addEventListener('resize', updateCarousel);
         
-        // Inicialización
+        // Inicialización del Carrusel
         updateCarousel();
         startAutoSlide();
     </script>
