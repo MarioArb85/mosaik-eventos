@@ -517,7 +517,22 @@
             
             .hero {
                 background-image: url('img/home/hero/hero-mobile.jpg'); 
-                padding: 100px 0; 
+                /* CORRECCIÓN: Centrado Vertical con Flexbox, Altura Mínima y Padding */
+                min-height: 250px; /* Altura mínima, permitiendo que crezca */
+                padding: 40px 0; /* Padding vertical para evitar desbordamiento */
+                
+                display: flex; /* Habilitar Flexbox */
+                flex-direction: column; /* Apila el contenido verticalmente */
+                align-items: center; /* Centrado Horizontal de los elementos hijos */
+                justify-content: center; /* Centrado Vertical */
+            }
+            
+            /* Eliminamos el estilo complejo del .hero .container, ya que el flexbox en .hero es suficiente */
+            .hero .container {
+                /* Aseguramos que el contenedor interno no interfiera con el centrado */
+                display: block; /* Volvemos a comportamiento normal */
+                text-align: center;
+                padding: 0 20px; /* Aseguramos padding lateral */
             }
             
             .about {
