@@ -474,178 +474,199 @@
         </div>
     </footer>
 
-    <script>
-        // =========================================================
-        // LÓGICA DE TRADUCCIÓN (i18n)
-        // =========================================================
-        const translations = {
-            es: {
-                pageTitle: 'Mosaïk Eventos | Contacto',
-                navEvents: 'Eventos', navAbout: 'Nosotros', navContact: 'Contacto',
-                contactTitle: 'Cuéntanos acerca de tu siguiente evento',
-                contactSubtitle: 'Comparte los detalles de tu evento y nos pondremos en contacto contigo para empezar a crear una experiencia inolvidable.',
-                formTitle: 'Acerca de tu evento',
-                formName: 'Nombre Completo', formEmail: 'Email', formPhone: 'Teléfono', formEvent: 'Tipo de Evento',
-                formMessage: 'Describe brevemente tu evento incluyendo número de asistentes aproximado.',
-                formSubmitWhatsapp: 'Contactar por WhatsApp',
-                confirmationMessage: 'Confirma el envío del mensaje en Whatsapp.',
-                requiredWarning: '¡Atención! Todos los campos son obligatorios para poder enviar el mensaje.',
-                footerCopy: '© 2025 Mosaïk Eventos. Todos los derechos reservados.'
-            },
-            en: {
-                pageTitle: 'Mosaïk Eventos | Contact',
-                navEvents: 'Events', navAbout: 'About Us', navContact: 'Contact',
-                contactTitle: 'Let’s talk about your next event',
-                contactSubtitle: 'Tell us about your event, and we’ll reach out to start designing an extraordinary experience together.',
-                formTitle: 'About Your Event',
-                formName: 'Name and Lastname', formEmail: 'Email', formPhone: 'Phone Number', formEvent: 'Event Type',
-                formMessage: 'Briefly describe your event, including the approximate number of guests.',
-                formSubmitWhatsapp: 'Contact via WhatsApp',
-                confirmationMessage: 'Confirm the message submission on WhatsApp.', 
-                requiredWarning: 'Attention! All fields are mandatory to be able to send the message.',
-                footerCopy: '© 2025 Mosaïk Eventos. All rights reserved.'
-            }
-        };
+	<script>
+		// =========================================================
+		// LÓGICA DE TRADUCCIÓN (i18n)
+		// =========================================================
+		const translations = {
+			es: {
+				pageTitle: 'Mosaïk Eventos | Contacto',
+				navEvents: 'Eventos', navAbout: 'Nosotros', navContact: 'Contacto',
+				contactTitle: 'Cuéntanos acerca de tu siguiente evento',
+				contactSubtitle: 'Comparte los detalles de tu evento y nos pondremos en contacto contigo para empezar a crear una experiencia inolvidable.',
+				formTitle: 'Acerca de tu evento',
+				formName: 'Nombre Completo', formEmail: 'Email', formPhone: 'Teléfono', formEvent: 'Tipo de Evento',
+				formMessage: 'Describe brevemente tu evento incluyendo número de asistentes aproximado.',
+				formSubmitWhatsapp: 'Contactar por WhatsApp',
+				confirmationMessage: 'Confirma el envío del mensaje en Whatsapp.',
+				requiredWarning: '¡Atención! Todos los campos son obligatorios para poder enviar el mensaje.',
+				footerCopy: '© 2025 Mosaïk Eventos. Todos los derechos reservados.'
+			},
+			en: {
+				pageTitle: 'Mosaïk Eventos | Contact',
+				navEvents: 'Events', navAbout: 'About Us', navContact: 'Contact',
+				contactTitle: 'Let’s talk about your next event',
+				contactSubtitle: 'Tell us about your event, and we’ll reach out to start designing an extraordinary experience together.',
+				formTitle: 'About Your Event',
+				formName: 'Name and Lastname', formEmail: 'Email', formPhone: 'Phone Number', formEvent: 'Event Type',
+				formMessage: 'Briefly describe your event, including the approximate number of guests.',
+				formSubmitWhatsapp: 'Contact via WhatsApp',
+				confirmationMessage: 'Confirm the message submission on WhatsApp.', 
+				requiredWarning: 'Attention! All fields are mandatory to be able to send the message.',
+				footerCopy: '© 2025 Mosaïk Eventos. All rights reserved.'
+			}
+		};
 
-        function setLanguage(lang) {
-            // Establece el atributo lang en la etiqueta HTML para SEO y accesibilidad
-            document.documentElement.lang = lang; 
-            
-            const elements = document.querySelectorAll('[data-translate]');
-            elements.forEach(element => {
-                const key = element.getAttribute('data-translate');
-                if (translations[lang] && translations[lang][key]) {
-                    if (element.tagName === 'TITLE') { 
-                        document.title = translations[lang][key]; 
-                    } else { 
-                        // Para el botón, solo cambiamos el textContent, el HTML (el ícono de WhatsApp) se mantiene
-                        if (element.id === 'submitBtn') {
-                            // Mantenemos el icono y solo actualizamos el texto después de él
-                            const icon = element.querySelector('i');
-                            element.textContent = translations[lang][key];
-                            if (icon) {
-                                element.prepend(icon); // Vuelve a poner el icono al principio
-                                // Asegurar que haya un espacio entre el icono y el texto (aunque el CSS ya lo maneja con margin-right)
-                                if (element.textContent.trim() !== '') {
-                                    element.insertBefore(document.createTextNode(' '), icon.nextSibling); 
-                                }
-                            }
-                        } else {
-                            element.textContent = translations[lang][key]; 
-                        }
-                    }
-                }
-            });
-            
-            // Llama a la validación después de cambiar el idioma para asegurar el estado de la advertencia
-            checkFormValidity();
-        }
-        
-        function detectAndSetLanguage() {
-            // Detecta el idioma principal del navegador (ej. 'es-ES' -> 'es')
-            const userLang = navigator.language.split('-')[0]; 
-            // Si el idioma es español, lo usa. Si no, usa el inglés como predeterminado para "el resto".
-            const langToUse = (userLang === 'es') ? 'es' : 'en';
-            setLanguage(langToUse);
-        }
+		function setLanguage(lang) {
+			// Establece el atributo lang en la etiqueta HTML para SEO y accesibilidad
+			document.documentElement.lang = lang; 
+			
+			const elements = document.querySelectorAll('[data-translate]');
+			elements.forEach(element => {
+				const key = element.getAttribute('data-translate');
+				if (translations[lang] && translations[lang][key]) {
+					if (element.tagName === 'TITLE') { 
+						document.title = translations[lang][key]; 
+					} else { 
+						// Para el botón, solo cambiamos el textContent, el HTML (el ícono de WhatsApp) se mantiene
+						if (element.id === 'submitBtn') {
+							// Mantenemos el icono y solo actualizamos el texto después de él
+							const icon = element.querySelector('i');
+							element.textContent = translations[lang][key];
+							if (icon) {
+								element.prepend(icon); // Vuelve a poner el icono al principio
+								// Asegurar que haya un espacio entre el icono y el texto (aunque el CSS ya lo maneja con margin-right)
+								if (element.textContent.trim() !== '') {
+									element.insertBefore(document.createTextNode(' '), icon.nextSibling); 
+								}
+							}
+						} else {
+							element.textContent = translations[lang][key]; 
+						}
+					}
+				}
+			});
+			
+			// Llama a la validación después de cambiar el idioma para asegurar el estado de la advertencia
+			checkFormValidity();
+		}
+		
+		function detectAndSetLanguage() {
+			// Detecta el idioma principal del navegador (ej. 'es-ES' -> 'es')
+			const userLang = navigator.language.split('-')[0]; 
+			// Si el idioma es español, lo usa. Si no, usa el inglés como predeterminado para "el resto".
+			const langToUse = (userLang === 'es') ? 'es' : 'en';
+			setLanguage(langToUse);
+		}
+		
+		// =========================================================
+		// NUEVA FUNCIÓN: DETECCIÓN DE DISPOSITIVO MÓVIL
+		// =========================================================
+		function isMobileDevice() {
+			// Usa una expresión regular para detectar patrones comunes de User Agent móvil
+			const mobileRegex = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i;
+			return mobileRegex.test(navigator.userAgent);
+		}
+		// =========================================================
 
-        // =========================================================
-        // TOGGLE Y FUNCIONALIDAD DE FORMULARIO
-        // =========================================================
 
-        // TOGGLE DEL MENÚ MÓVIL
-        document.getElementById('menuToggle').addEventListener('click', function() {
-            document.getElementById('mainNav').classList.toggle('nav-open');
-        });
+		// =========================================================
+		// TOGGLE Y FUNCIONALIDAD DE FORMULARIO
+		// =========================================================
 
-        // NUEVAS VARIABLES PARA VALIDACIÓN Y ENVÍO POR WHATSAPP
-        const contactForm = document.getElementById('contactForm');
-        const submitBtn = document.getElementById('submitBtn');
-        const requiredWarning = document.getElementById('requiredFieldsWarning');
-        const confirmationDiv = document.getElementById('confirmationMessage');
-        const formContainer = document.querySelector('.contact-form');
-        
-        // FUNCIÓN PARA VALIDAR CAMPOS Y HABILITAR/DESHABILITAR BOTÓN
-        function checkFormValidity() {
-            const allFields = contactForm.querySelectorAll('[required]');
-            let allFilled = true;
-            
-            allFields.forEach(field => {
-                // Validación simple para verificar si el campo tiene contenido
-                if (field.value.trim() === '') {
-                    allFilled = false;
-                }
-            });
+		// TOGGLE DEL MENÚ MÓVIL
+		document.getElementById('menuToggle').addEventListener('click', function() {
+			document.getElementById('mainNav').classList.toggle('nav-open');
+		});
 
-            submitBtn.disabled = !allFilled;
-            
-            // Mostrar la advertencia solo si está deshabilitado
-            requiredWarning.style.display = allFilled ? 'none' : 'block';
-        }
-        
-        // Agregar eventos de escucha para validar al escribir
-        contactForm.addEventListener('input', checkFormValidity);
+		// NUEVAS VARIABLES PARA VALIDACIÓN Y ENVÍO POR WHATSAPP
+		const contactForm = document.getElementById('contactForm');
+		const submitBtn = document.getElementById('submitBtn');
+		const requiredWarning = document.getElementById('requiredFieldsWarning');
+		const confirmationDiv = document.getElementById('confirmationMessage');
+		const formContainer = document.querySelector('.contact-form');
+		
+		// FUNCIÓN PARA VALIDAR CAMPOS Y HABILITAR/DESHABILITAR BOTÓN
+		function checkFormValidity() {
+			const allFields = contactForm.querySelectorAll('[required]');
+			let allFilled = true;
+			
+			allFields.forEach(field => {
+				// Validación simple para verificar si el campo tiene contenido
+				if (field.value.trim() === '') {
+					allFilled = false;
+				}
+			});
 
-        // FUNCIONALIDAD DE ENVÍO POR WHATSAPP
-        contactForm.addEventListener('submit', function(event) {
-            event.preventDefault(); 
-            
-            // Si el botón está deshabilitado, no se envía
-            if (submitBtn.disabled) return;
-            
-            // NÚMERO DE TELÉFONO (593 994641811 sin el +)
-            const whatsappNumber = '593994641811'; 
-            
-            // 3. Obtener los datos y construir el cuerpo del mensaje de WhatsApp
-            const formData = new FormData(contactForm);
-            const currentLang = document.documentElement.lang;
-            
-            let messageBody = `*Nueva Consulta de Eventos - Mosaïk Eventos*\n\n`;
-            
-            // Mapeo de campos a su etiqueta en ESPAÑOL y su clave de traducción
-            const fieldsMap = {
-                name: { es: 'Nombre Completo', key: 'formName' }, 
-                email: { es: 'Email', key: 'formEmail' }, 
-                phone: { es: 'Teléfono', key: 'formPhone' }, 
-                event: { es: 'Tipo de Evento', key: 'formEvent' }, 
-                message: { es: 'Descripción del evento y asistentes', key: 'formMessage' } 
-            };
-            
-            for (const [key, map] of Object.entries(fieldsMap)) {
-                let value = formData.get(key) || 'No proporcionado';
-                let label = map.es; 
-                
-                // Usar la traducción si el idioma actual es inglés
-                if (currentLang === 'en' && translations.en[map.key]) {
-                    label = translations.en[map.key];
-                }
-                
-                messageBody += `*${label}*: ${value}\n`;
-            }
-            
-            // 1. Ocultar el formulario (después de obtener los datos, antes de abrir WhatsApp)
-            formContainer.style.display = 'none';
-            
-            // 2. Mostrar el mensaje de confirmación
-            confirmationDiv.style.display = 'block';
-            setTimeout(() => {
-                confirmationDiv.classList.add('show');
-            }, 10); 
-            
-            // 4. Abrir la URL de WhatsApp
-            const whatsappLink = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(messageBody)}`;
-            window.open(whatsappLink, '_blank'); // Abrir en una nueva pestaña
-            
-            // 5. Limpiar los campos y mantener el mensaje de confirmación visible
-            contactForm.reset();
-            submitBtn.disabled = true;
-            requiredWarning.style.display = 'block'; // Aunque el botón esté disabled, este ya no es visible
-        });
+			submitBtn.disabled = !allFilled;
+			
+			// Mostrar la advertencia solo si está deshabilitado
+			requiredWarning.style.display = allFilled ? 'none' : 'block';
+		}
+		
+		// Agregar eventos de escucha para validar al escribir
+		contactForm.addEventListener('input', checkFormValidity);
 
-        document.addEventListener('DOMContentLoaded', function() {
-            detectAndSetLanguage();
-            checkFormValidity(); // Llamada inicial para establecer el estado del botón y la advertencia
-        });
-    </script>
+		// FUNCIONALIDAD DE ENVÍO POR WHATSAPP
+		contactForm.addEventListener('submit', function(event) {
+			event.preventDefault(); 
+			
+			// Si el botón está deshabilitado, no se envía
+			if (submitBtn.disabled) return;
+			
+			// NÚMERO DE TELÉFONO (593 994641811 sin el +)
+			const whatsappNumber = '593994641811'; 
+			
+			// 1. Obtener los datos y construir el cuerpo del mensaje de WhatsApp
+			const formData = new FormData(contactForm);
+			const currentLang = document.documentElement.lang;
+			
+			let messageBody = `*Nueva Consulta de Eventos - Mosaïk Eventos*\n\n`;
+			
+			// Mapeo de campos a su etiqueta en ESPAÑOL y su clave de traducción
+			const fieldsMap = {
+				name: { es: 'Nombre Completo', key: 'formName' }, 
+				email: { es: 'Email', key: 'formEmail' }, 
+				phone: { es: 'Teléfono', key: 'formPhone' }, 
+				event: { es: 'Tipo de Evento', key: 'formEvent' }, 
+				message: { es: 'Descripción del evento y asistentes', key: 'formMessage' } 
+			};
+			
+			for (const [key, map] of Object.entries(fieldsMap)) {
+				let value = formData.get(key) || 'No proporcionado';
+				let label = map.es; 
+				
+				// Usar la traducción si el idioma actual es inglés
+				if (currentLang === 'en' && translations.en[map.key]) {
+					label = translations.en[map.key];
+				}
+				
+				messageBody += `*${label}*: ${value}\n`;
+			}
+			
+			// 2. CONSTRUIR EL ENLACE DE WHATSAPP CON LÓGICA MÓVIL/ESCRITORIO
+			let whatsappLink = '';
+			
+			if (isMobileDevice()) {
+				// En Móviles: Usa wa.me para abrir la aplicación nativa
+				whatsappLink = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(messageBody)}`;
+			} else {
+				// En Escritorio: Usa la API para abrir WhatsApp Web
+				whatsappLink = `https://api.whatsapp.com/send?phone=${whatsappNumber}&text=${encodeURIComponent(messageBody)}`;
+			}
+
+			// 3. Ocultar el formulario
+			formContainer.style.display = 'none';
+			
+			// 4. Mostrar el mensaje de confirmación
+			confirmationDiv.style.display = 'block';
+			setTimeout(() => {
+				confirmationDiv.classList.add('show');
+			}, 10); 
+			
+			// 5. Abrir la URL de WhatsApp
+			window.open(whatsappLink, '_blank'); // Abrir en una nueva pestaña
+			
+			// 6. Limpiar los campos y mantener el mensaje de confirmación visible
+			contactForm.reset();
+			submitBtn.disabled = true;
+			requiredWarning.style.display = 'block'; 
+		});
+
+		document.addEventListener('DOMContentLoaded', function() {
+			detectAndSetLanguage();
+			checkFormValidity(); // Llamada inicial para establecer el estado del botón y la advertencia
+		});
+	</script>
 </body>
 </html>
