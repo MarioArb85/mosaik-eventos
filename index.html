@@ -36,7 +36,7 @@
         }
 
         body {
-            font-family: 'Comfortaa', sans-serif; /* CAMBIO: Comfortaa */
+            font-family: 'Comfortaa', sans-serif;
             line-height: 1.6;
             color: var(--gris-oscuro);
             background-color: var(--blanco);
@@ -764,7 +764,6 @@
                 footerCopy: '© 2025 Mosaïk Eventos. Todos los derechos reservados.'
             },
             en: {
-                // PLACEHOLDERS EN INGLÉS - DEBEN SER TRADUCIDOS REALMENTE
                 pageTitle: 'Mosaïk Eventos',
                 navEvents: 'Events', navAbout: 'About Us', navContact: 'Contact',
                 heroTitle: 'Creating memorable experiences', heroSubtitle: 'Your event, our passion. From design to execution.',
@@ -808,21 +807,6 @@
 
         // Ejecutar la detección y traducción al cargar el contenido
         document.addEventListener('DOMContentLoaded', detectAndSetLanguage);
-
-        // =========================================================
-        // SERVICE WORKER (PWA) Y CARRUSEL
-        // =========================================================
-        if ('serviceWorker' in navigator) {
-            window.addEventListener('load', () => {
-                navigator.serviceWorker.register('/sw.js')
-                    .then(registration => {
-                        console.log('Service Worker registrado con éxito:', registration);
-                    })
-                    .catch(error => {
-                        console.log('Fallo en el registro de Service Worker:', error);
-                    });
-            });
-        }
 
         // TOGGLE DEL MENÚ MÓVIL
         document.getElementById('menuToggle').addEventListener('click', function() {

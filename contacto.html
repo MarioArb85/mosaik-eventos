@@ -23,6 +23,8 @@
             --blanco: #FFFFFF;
             --fondo-madera: url('fondo-madera-clara.png'); 
             --verde-confirmacion: #4CAF50;
+            /* CAMBIO: Color para WhatsApp (Verde más sobrio) */
+            --whatsapp-verde: #4F9B69; 
         }
 
         /* Estilos Globales */
@@ -89,6 +91,31 @@
 
         .btn-cta:hover {
             background-color: #315082;
+        }
+        
+        /* Estilo para el botón de WhatsApp */
+        .btn-whatsapp {
+            background-color: var(--whatsapp-verde);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); 
+        }
+        
+        .btn-whatsapp:hover {
+            /* CAMBIO: Hover a un verde más sobrio y oscuro */
+            background-color: #3E7E55; 
+        }
+        
+        /* Estilos para el ícono de WhatsApp */
+        #submitBtn i {
+            font-size: 1.2em; /* Ícono más grande */
+            margin-right: 10px; /* Separación con el texto */
+        }
+        
+        /* Estilo para botón deshabilitado */
+        .btn-cta:disabled {
+            background-color: #aaa; 
+            cursor: not-allowed;
+            opacity: 0.6;
+            pointer-events: none; 
         }
 
         /* 1. Header */
@@ -176,7 +203,7 @@
         /* Contenedor para los campos del formulario */
         .form-fields {
             display: grid;
-            grid-template-columns: 1fr; /* Por defecto: 1 columna (Móvil/Tablet) */
+            grid-template-columns: 1fr; 
             gap: 20px;
         }
 
@@ -226,14 +253,28 @@
             grid-column: 1 / -1; 
         }
         
+        /* Contenedor para la advertencia y el botón */
+        .submit-container {
+            margin-top: 0; 
+            text-align: center;
+        }
+        
+        /* Estilo para el mensaje de advertencia (oculto por defecto) */
+        #requiredFieldsWarning {
+            color: var(--azul-principal);
+            font-size: 0.85em;
+            margin-bottom: 10px;
+            display: none; 
+        }
+        
         .contact-form button {
-            margin-top: 20px;
+            margin-top: 20px; 
         }
         
         /* --- ESTILOS DEL MENSAJE DE CONFIRMACIÓN EN PÁGINA --- */
         #confirmationMessage {
-            display: none; /* Inicialmente oculto */
-            background-color: var(--verde-confirmacion); 
+            display: none; 
+            background-color: var(--azul-principal); 
             color: var(--blanco);
             padding: 20px;
             border-radius: 8px;
@@ -325,9 +366,13 @@
             .form-fields {
                 grid-template-columns: 1fr 1fr;
             }
+            .submit-container {
+                grid-column: 1 / -1; 
+                text-align: left; /* Ajuste para el botón en escritorio */
+            }
             .contact-form button {
                 width: auto;
-                grid-column: 1 / -1; 
+                margin-top: 15px; /* Ajuste */
             }
         }
 
@@ -372,7 +417,7 @@
             <div class="contact-form-container">
                 
                 <div id="confirmationMessage">
-                    <i class="fas fa-check-circle"></i> <span data-translate="confirmationMessage">Mensaje enviado con éxito. ¡Gracias por contactar con Mosaïk Eventos nos contactaremos contigo en breve!</span>
+                    <i class="fas fa-check-circle"></i> <span data-translate="confirmationMessage">Confirma el envío del mensaje en Whatsapp.</span>
                 </div>
                 
                 <div class="contact-form">
@@ -382,31 +427,37 @@
                         <div class="form-fields">
                             
                             <div class="form-group">
-                                <label for="name" data-translate="formName">Tu Nombre Completo</label>
-                                <input type="text" id="name" name="name" required>
+                                <label for="name" data-translate="formName">Nombre Completo</label>
+                                <input type="text" id="name" name="name" required maxlength="80">
                             </div>
                             
                             <div class="form-group">
-                                <label for="email" data-translate="formEmail">Tu Email</label>
-                                <input type="email" id="email" name="email" required>
+                                <label for="email" data-translate="formEmail">Email</label>
+                                <input type="email" id="email" name="email" required maxlength="100">
                             </div>
                             
                             <div class="form-group">
-                                <label for="phone" data-translate="formPhone">Tu Teléfono</label>
-                                <input type="text" id="phone" name="phone" required>
+                                <label for="phone" data-translate="formPhone">Teléfono</label>
+                                <input type="text" id="phone" name="phone" required maxlength="20">
                             </div>
                             
                             <div class="form-group">
                                 <label for="event" data-translate="formEvent">Tipo de Evento</label>
-                                <input type="text" id="event" name="event" required>
+                                <input type="text" id="event" name="event" required maxlength="50">
                             </div>
                             
                             <div class="form-group full-width">
                                 <label for="message" data-translate="formMessage">Describe brevemente tu evento incluyendo número de asistentes aproximado.</label>
-                                <textarea id="message" name="message" required></textarea>
+                                <textarea id="message" name="message" required maxlength="500"></textarea>
                             </div>
                             
-                            <button type="submit" class="btn-cta" data-translate="formSubmit">Enviar Mensaje</button>
+                            <div class="submit-container full-width">
+                                <p id="requiredFieldsWarning" data-translate="requiredWarning">¡Atención! Todos los campos son obligatorios para poder enviar el mensaje.</p>
+                                
+                                <button type="submit" id="submitBtn" class="btn-cta btn-whatsapp" disabled data-translate="formSubmitWhatsapp">
+                                    <i class="fab fa-whatsapp"></i> Contactar por WhatsApp
+                                </button>
+                            </div>
                             
                         </div>
                         
@@ -434,10 +485,14 @@
                 contactTitle: 'Cuéntanos acerca de tu siguiente evento',
                 contactSubtitle: 'Comparte los detalles de tu evento y nos pondremos en contacto contigo para empezar a crear una experiencia inolvidable.',
                 formTitle: 'Acerca de tu evento',
-                formName: 'Tu Nombre Completo', formEmail: 'Tu Email', formPhone: 'Tu Teléfono', formEvent: 'Tipo de Evento',
+                formName: 'Nombre Completo', formEmail: 'Email', formPhone: 'Teléfono', formEvent: 'Tipo de Evento',
                 formMessage: 'Describe brevemente tu evento incluyendo número de asistentes aproximado.',
-                formSubmit: 'Enviar Mensaje',
-                confirmationMessage: 'Mensaje enviado con éxito. ¡Gracias por contactar con Mosaïk Eventos, nos contactaremos contigo en breve!',
+                formSubmit: 'Enviar Mensaje', 
+                // CLAVES ACTUALIZADAS
+                formSubmitWhatsapp: 'Contactar por WhatsApp',
+                confirmationMessage: 'Confirma el envío del mensaje en Whatsapp.', 
+                // TEXTO DE ADVERTENCIA ACTUALIZADO
+                requiredWarning: '¡Atención! Todos los campos son obligatorios para poder enviar el mensaje.',
                 footerCopy: '© 2025 Mosaïk Eventos. Todos los derechos reservados.'
             },
             en: {
@@ -450,7 +505,11 @@
                 formName: 'Name and Lastname', formEmail: 'Email', formPhone: 'Phone Number', formEvent: 'Event Type',
                 formMessage: 'Briefly describe your event, including the approximate number of guests.',
                 formSubmit: 'Send Your Message',
-                confirmationMessage: 'Your message has been sent successfully. Thank you for reaching out to Mosaïk Events — our team will be in touch shortly!',
+                // CLAVES ACTUALIZADAS
+                formSubmitWhatsapp: 'Contact via WhatsApp',
+                confirmationMessage: 'Confirm the message submission on WhatsApp.', 
+                // TEXTO DE ADVERTENCIA ACTUALIZADO (Añadiendo "the message")
+                requiredWarning: 'Attention! All fields are mandatory to be able to send the message.',
                 footerCopy: '© 2025 Mosaïk Eventos. All rights reserved.'
             }
         };
@@ -466,10 +525,27 @@
                     if (element.tagName === 'TITLE') { 
                         document.title = translations[lang][key]; 
                     } else { 
-                        element.textContent = translations[lang][key]; 
+                        // Para el botón, solo cambiamos el textContent, el HTML (el ícono de WhatsApp) se mantiene
+                        if (element.id === 'submitBtn') {
+                            // Mantenemos el icono y solo actualizamos el texto después de él
+                            const icon = element.querySelector('i');
+                            element.textContent = translations[lang][key];
+                            if (icon) {
+                                element.prepend(icon); // Vuelve a poner el icono al principio
+                                // Asegurar que haya un espacio entre el icono y el texto (aunque el CSS ya lo maneja con margin-right)
+                                if (element.textContent.trim() !== '') {
+                                    element.insertBefore(document.createTextNode(' '), icon.nextSibling); 
+                                }
+                            }
+                        } else {
+                            element.textContent = translations[lang][key]; 
+                        }
                     }
                 }
             });
+            
+            // Llama a la validación después de cambiar el idioma para asegurar el estado de la advertencia
+            checkFormValidity();
         }
         
         function detectAndSetLanguage() {
@@ -480,8 +556,6 @@
             setLanguage(langToUse);
         }
 
-        document.addEventListener('DOMContentLoaded', detectAndSetLanguage);
-
         // =========================================================
         // TOGGLE Y FUNCIONALIDAD DE FORMULARIO
         // =========================================================
@@ -491,15 +565,72 @@
             document.getElementById('mainNav').classList.toggle('nav-open');
         });
 
-        // FUNCIONALIDAD DE ENVÍO Y RESETEO DE FORMULARIO
-        document.getElementById('contactForm').addEventListener('submit', function(event) {
+        // NUEVAS VARIABLES PARA VALIDACIÓN Y ENVÍO POR WHATSAPP
+        const contactForm = document.getElementById('contactForm');
+        const submitBtn = document.getElementById('submitBtn');
+        const requiredWarning = document.getElementById('requiredFieldsWarning');
+        const confirmationDiv = document.getElementById('confirmationMessage');
+        const formContainer = document.querySelector('.contact-form');
+        
+        // FUNCIÓN PARA VALIDAR CAMPOS Y HABILITAR/DESHABILITAR BOTÓN
+        function checkFormValidity() {
+            const allFields = contactForm.querySelectorAll('[required]');
+            let allFilled = true;
+            
+            allFields.forEach(field => {
+                // Validación simple para verificar si el campo tiene contenido
+                if (field.value.trim() === '') {
+                    allFilled = false;
+                }
+            });
+
+            submitBtn.disabled = !allFilled;
+            
+            // Mostrar la advertencia solo si está deshabilitado
+            requiredWarning.style.display = allFilled ? 'none' : 'block';
+        }
+        
+        // Agregar eventos de escucha para validar al escribir
+        contactForm.addEventListener('input', checkFormValidity);
+
+        // FUNCIONALIDAD DE ENVÍO POR WHATSAPP
+        contactForm.addEventListener('submit', function(event) {
             event.preventDefault(); 
             
-            const form = this;
-            const confirmationDiv = document.getElementById('confirmationMessage');
+            // Si el botón está deshabilitado, no se envía
+            if (submitBtn.disabled) return;
             
-            // 1. Ocultar el formulario
-            const formContainer = document.querySelector('.contact-form');
+            // NÚMERO DE TELÉFONO (593 994641811 sin el +)
+            const whatsappNumber = '593994641811'; 
+            
+            // 3. Obtener los datos y construir el cuerpo del mensaje de WhatsApp
+            const formData = new FormData(contactForm);
+            const currentLang = document.documentElement.lang;
+            
+            let messageBody = `*Nueva Consulta de Eventos - Mosaïk Eventos*\n\n`;
+            
+            // Mapeo de campos a su etiqueta en ESPAÑOL y su clave de traducción
+            const fieldsMap = {
+                name: { es: 'Nombre Completo', key: 'formName' }, 
+                email: { es: 'Email', key: 'formEmail' }, 
+                phone: { es: 'Teléfono', key: 'formPhone' }, 
+                event: { es: 'Tipo de Evento', key: 'formEvent' }, 
+                message: { es: 'Descripción del evento y asistentes', key: 'formMessage' } 
+            };
+            
+            for (const [key, map] of Object.entries(fieldsMap)) {
+                let value = formData.get(key) || 'No proporcionado';
+                let label = map.es; 
+                
+                // Usar la traducción si el idioma actual es inglés
+                if (currentLang === 'en' && translations.en[map.key]) {
+                    label = translations.en[map.key];
+                }
+                
+                messageBody += `*${label}*: ${value}\n`;
+            }
+            
+            // 1. Ocultar el formulario (después de obtener los datos, antes de abrir WhatsApp)
             formContainer.style.display = 'none';
             
             // 2. Mostrar el mensaje de confirmación
@@ -507,35 +638,20 @@
             setTimeout(() => {
                 confirmationDiv.classList.add('show');
             }, 10); 
-
-            // 3. Obtener los datos y construir el cuerpo del correo
-            const formData = new FormData(form);
-            let body = '';
-            for (const [key, value] of formData.entries()) {
-                // Traduce la clave para el cuerpo del correo si el idioma actual es 'en'
-                const currentLang = document.documentElement.lang;
-                const keyTranslation = currentLang === 'en' && translations['en'][`form${key.charAt(0).toUpperCase() + key.slice(1)}`] 
-                                    ? translations['en'][`form${key.charAt(0).toUpperCase() + key.slice(1)}`] 
-                                    : (currentLang === 'es' && translations['es'][`form${key.charAt(0).toUpperCase() + key.slice(1)}`] 
-                                       ? translations['es'][`form${key.charAt(0).toUpperCase() + key.slice(1)}`] 
-                                       : key.charAt(0).toUpperCase() + key.slice(1)); // Intenta usar la traducción, si no, usa la clave original
-
-                body += `${keyTranslation}: ${value}\n`;
-            }
             
-            // 4. Abrir el cliente de correo con los datos
-            const mailtoLink = `mailto:pallares.carolina@gmail.com?subject=Nueva Consulta de Eventos&body=${encodeURIComponent(body)}`;
-            window.location.href = mailtoLink;
+            // 4. Abrir la URL de WhatsApp
+            const whatsappLink = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(messageBody)}`;
+            window.open(whatsappLink, '_blank'); // Abrir en una nueva pestaña
+            
+            // 5. Limpiar los campos y mantener el mensaje de confirmación visible
+            contactForm.reset();
+            submitBtn.disabled = true;
+            requiredWarning.style.display = 'block'; // Aunque el botón esté disabled, este ya no es visible
+        });
 
-            // 5. Resetear los campos y revertir la vista después de un breve momento
-            setTimeout(() => {
-                form.reset();
-                
-                // Ocultar el mensaje y mostrar el formulario para un nuevo envío
-                confirmationDiv.classList.remove('show');
-                confirmationDiv.style.display = 'none';
-                formContainer.style.display = 'block'; 
-            }, 8000); 
+        document.addEventListener('DOMContentLoaded', function() {
+            detectAndSetLanguage();
+            checkFormValidity(); // Llamada inicial para establecer el estado del botón y la advertencia
         });
     </script>
 </body>
